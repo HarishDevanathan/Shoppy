@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 9.1.0, for macos13.7 (arm64)
 --
 -- Host: localhost    Database: project_db
 -- ------------------------------------------------------
@@ -27,7 +27,7 @@ CREATE TABLE `user_data` (
   `name` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `user_data` (
 
 LOCK TABLES `user_data` WRITE;
 /*!40000 ALTER TABLE `user_data` DISABLE KEYS */;
-INSERT INTO `user_data` VALUES (1,'John Doe','john.doe@example.com'),(2,'Harish','harish2310136@ssn.edu.in'),(3,'Harish','harishdevanathan123@gmail.com'),(4,'Harish D','harishdevanathan123@gmail.com'),(5,'Harish D','harishdevanathan123@gmail.com');
+INSERT INTO `user_data` VALUES (1,'John Doe','john.doe@example.com'),(2,'Harish','harish2310136@ssn.edu.in'),(3,'Harish','harishdevanathan123@gmail.com'),(4,'Harish D','harishdevanathan123@gmail.com'),(5,'Harish D','harishdevanathan123@gmail.com'),(6,'sigma','skibidrizzler@gmail.com');
 /*!40000 ALTER TABLE `user_data` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,5 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-13 22:03:40
-
+-- Dump completed on 2025-01-13 22:33:44

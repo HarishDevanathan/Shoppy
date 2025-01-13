@@ -1,4 +1,4 @@
-C:\Program Files\MySQL\MySQL Server 8.0\binfrom flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__, template_folder='../templates')
