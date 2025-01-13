@@ -1,13 +1,10 @@
-import pymysql
-pymysql.install_as_MySQLdb()
-
-from flask import Flask, render_template, request, redirect
+C:\Program Files\MySQL\MySQL Server 8.0\binfrom flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__, template_folder='../templates')
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Harish123@192.168.1.39/project_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Harish123@localhost/project_db'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
