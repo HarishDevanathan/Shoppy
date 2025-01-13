@@ -2,11 +2,186 @@
 
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="../static/styles/aboutuspage.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/aboutuspage.css') }}">
+
 {% endblock %}
 
 {% block body %}
     {{ super() }}
+    <div class="container-fluid">
 
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis vitae, nihil, nobis assumenda deserunt at non quas animi error exercitationem doloribus accusantium sed reprehenderit laboriosam necessitatibus enim! Saepe ipsam magnam illum rerum labore id ea, aliquid vitae repellat totam consequuntur qui ex animi tempora dolor ipsa impedit consectetur voluptas voluptates deserunt laboriosam molestias at facere neque. Quaerat, praesentium nemo laborum aliquid reiciendis dolore esse voluptates alias expedita minus sed magni sequi. Nostrum similique labore perferendis, veniam at aliquam iure repellendus accusantium blanditiis quos optio maxime veritatis distinctio sunt, odit praesentium perspiciatis voluptate ducimus obcaecati! Iure voluptatum magnam praesentium fuga assumenda eum deleniti, cupiditate officiis odit aperiam doloribus tempora earum inventore ab expedita possimus laudantium beatae non, consequuntur libero minima quod quibusdam? Enim fugiat obcaecati quo saepe perspiciatis tenetur animi minus laboriosam voluptates veniam, ipsam dignissimos vitae, voluptatem delectus, quaerat in consectetur beatae neque magni quos excepturi! Sunt consequatur possimus, nobis laborum accusantium vero quam hic nostrum cumque earum! Quos voluptate assumenda sed, cumque sequi dolorem eligendi provident magni consequatur voluptas autem aliquid delectus error voluptates sit necessitatibus atque veritatis nobis. Quidem, culpa praesentium? Dolore tempora non ut impedit expedita quo eligendi molestias, quae voluptatum quidem adipisci illum ad laudantium aperiam magnam accusantium dolorum vitae nemo? Praesentium reiciendis, nisi voluptatem asperiores iusto quis nihil, inventore earum aperiam minus ex optio nobis mollitia laboriosam labore nulla dolore facilis. Sequi atque temporibus, modi dolores eligendi quam rem ut tempora facilis accusantium neque sed excepturi beatae, iste quo in? Repudiandae amet, nemo velit perspiciatis nisi veniam quam necessitatibus iusto doloremque vero ex enim odio culpa aperiam. Dolorem, eius! Commodi quos inventore voluptas voluptatem, sed libero vel. Nesciunt facere voluptates, iusto minus neque eligendi sapiente beatae quaerat amet tempora fuga, soluta vitae. Omnis distinctio hic aut, rerum iure facere quod, iste natus debitis, est totam. Vitae, reprehenderit! Amet, dolores, voluptatum optio aperiam consequatur quas dolorum asperiores quo molestias cum dolorem! Quam blanditiis illo quisquam aliquid labore dolores eum iure velit quis? Nihil repellendus architecto eaque accusantium iure! Placeat, nihil ipsam! Inventore atque doloremque dolor exercitationem obcaecati pariatur repellendus repudiandae sed quam minima doloribus eum ipsum a corporis eaque impedit, id aliquam nihil numquam est nulla ipsa quisquam explicabo expedita. A cum eius magni dolorum quod beatae, reprehenderit accusantium. Ullam ab possimus labore dignissimos quisquam, impedit quod, nemo corrupti nulla aliquam aperiam dolorum. Odio magnam quibusdam non similique labore doloremque nulla, illum rerum omnis doloribus distinctio tempore, vitae sunt! Ipsum quasi aut iusto quae, ex vel ea esse ab maxime, quam adipisci modi nemo quis. Reiciendis soluta quisquam repellat sapiente culpa eaque accusamus expedita labore, impedit ullam incidunt voluptates totam. Et molestias nihil sequi tempora perferendis ipsam quo laborum qui impedit similique vel deleniti ratione, at accusantium minus corrupti? Sed inventore tempore facilis molestiae et incidunt sit ea consequuntur, iure laborum exercitationem numquam enim nostrum quisquam id debitis consectetur possimus tenetur quae earum blanditiis. Dolorum debitis voluptatum sapiente voluptatibus libero doloremque id expedita, qui, cum vel consequuntur amet possimus, quo itaque dolore sed et saepe non?</p>
+        <div class="container">
+            <center>
+                <img src="../static/images/logocropped.png" style="margin-bottom: 20px;">
+            </center>
+            <center>
+            <div class="container company-description">
+                Shoppy is a leading e-commerce platform, offering a wide variety of products ranging from electronics to fashion, home goods, and more. With a user-friendly interface, Shoppy makes shopping easier and more convenient for customers, providing a seamless browsing experience across devices. Fast shipping, secure payment options, and excellent customer service set Shoppy apart as a reliable online marketplace. Users can find everything they need, with the added benefit of exclusive deals, discounts, and promotions. Whether shopping for everyday essentials or luxury items, Shoppy ensures a satisfying and hassle-free shopping experience every time.
+            </div>
+            </center>
+        </div>
+
+        <div class="container-fluid main mt-5">
+            <section class="row">
+                <img src="../static/images/delivery.png" class="col-2" id="deliveryboy" alt="Delivery Boy">
+                <p class="col" id="deliveryboypara">At Shoppy, we ensure a smooth and efficient delivery process. Once you place an order, our delivery agent swiftly picks up your package for dispatch. We rely on a trusted network of delivery personnel who handle your items with care, ensuring they reach you in perfect condition. With real-time updates and tracking information, you can easily monitor your package’s journey to your doorstep. We take pride in offering fast and reliable delivery. Interested in becoming a part of our team? We’re always looking to recruit new delivery agents. Click here to avail now and join our delivery network! 
+                    <br> 
+                        <button class="btn btn-danger m-3" id="join">JOIN NOW</button>
+                </p>
+            </section>
+
+            <section class="row mt-5">
+                <p class="col m-3" id="cartpara">Adding items to your cart on Shoppy is quick and easy! Simply browse our collection, select the product you like, and click 'Add to Cart.' Once your items are in the cart, you can proceed to checkout and choose your preferred payment method—Wallet, PayPal, or Cash on Delivery. Need to make changes? You can easily remove items from your cart before completing your purchase. Ready to review your selections? Click below to view your cart and proceed with a seamless shopping experience!
+                    <br>
+                        <button class="btn btn-warning m-3" id="cart-button">VIEW CART</button>
+                </p>
+                <img src="../static/images/cart.png" class="col-2" id="cart" alt="cart">
+            </section>
+
+            <section class="row mt-5">
+                <img src="../static/images/seller.png" class="col-2" id="seller" alt="seller">
+                <p class="col m-3 p-2" id="sellerpara">Become a verified seller on Shoppy and grow your business with ease! Registering as a seller is simple—just provide your business details, complete the verification process, and get approved to start selling your products. Verification ensures that your store is trusted by customers, giving you greater visibility and credibility. Join Shoppy today and take advantage of our seamless platform to showcase your products to a wide audience. Click below to register and get verified as a seller now
+                    <br>
+                        <button class="btn btn-success m-3" id="seller-button">REGISTER</button>
+                </p>
+            </section>
+
+            <section class="row mt-5">
+                <p class="col m-3 p-2" id="supportpara">At Shoppy, we're committed to providing exceptional customer support. While we do not offer phone support, you can easily get assistance through our smart chatbot, Shoppy, available 24/7 to address your queries and provide instant solutions. For more detailed concerns, you can reach out to us via email using the address provided below. We’re here to ensure your shopping experience remains smooth and hassle-free!
+                    <br>
+                        <button class="btn m-3" id="support-button">CONTACT US</button>
+                </p>
+                <img src="../static/images/customersupport.png" class="col-2" id="support" alt="customer support">
+            </section>
+
+        </div>
+        <center>
+            <h3 class="display" style="color:white; margin-top:20%;margin-bottom:10%;">
+                for any queries contact at <br>
+                shoppysemail@gmail.com
+            </h3>
+        </center>
+        
+    </div>
+
+    <script>
+    db = document.getElementById("deliveryboy");
+    dbp=document.getElementById('deliveryboypara')
+    window.addEventListener('scroll',()=>{
+        console.log(window.scrollY)
+    })
+    window.addEventListener('scroll', () => {
+
+        if(window.innerWidth>=1200){
+            value = window.scrollY;
+        
+            if(value>0){
+                db.style.left=1.5*value+"px";
+                db.style.opacity=(value/100)*2;
+                dbp.style.opacity=(value/100)*2;
+            }
+            if(value*1.5 >10){
+                db.style.left="10px";
+                db.style.opacity=10;
+            }
+            if(value> 332){
+                db.style.left=-0.5*(value-332)+"px";
+                dbp.style.opacity=10-((value)/100)*2;
+            }
+        }
+        else{
+            db.style.left="0px";
+            dbp.style.opacity=10;
+        }
+    });
+
+    cart=document.getElementById("cart");
+    cartp=document.getElementById("cartpara")
+    window.addEventListener('scroll',()=>{
+        if(window.innerWidth>1200){
+            value=window.scrollY;
+
+            if(value>125){
+                cart.style.right=(1.5)*(value-125)+"px";
+                cartp.style.opacity=(value-125)/100 * 2;
+            }
+
+            if( (value-125) * 1.5 > 10){
+                cart.style.right="10px";
+                cartp.style.opacity=10;
+            }
+
+            if(value>540){
+                cart.style.right=(-1.0)*(value-540)+"px";
+                cartp.style.opacity=10-((value-350)/100)*2;
+
+            }
+        }
+        else{
+            cart.style.right="0px";
+            cartp.style.opacity=10;
+        }
+    })
+
+    seller = document.getElementById("seller");
+    sellerp=document.getElementById('sellerpara')
+    window.addEventListener('scroll', () => {
+
+        if(window.innerWidth>1200){
+            value = window.scrollY;
+        
+            if(value>435){
+                seller.style.left=(1.5*(value-435))+"px";
+                sellerp.style.opacity=(value-435)/100 *2;
+            }
+
+            if((value-435)*1.5 > 10){
+                seller.style.left="10px";
+                sellerp.opacity=10;
+            }
+
+            if(value > 910){
+                seller.style.left=-1.0*(value-910)+"px";
+                sellerp.style.opacity=10-((value-600)/100)*2;
+            }
+
+        }
+        else{
+            seller.style.left="0px"
+            sellerp.style.opacity=10;
+        }
+    });
+
+    support=document.getElementById("support");
+    supportp=document.getElementById("supportpara")
+    window.addEventListener('scroll',()=>{
+        if(window.innerWidth>1200){
+            value=window.scrollY;
+
+            if(value>730){
+                support.style.right=(1.5)*(value-730)+"px";
+                supportp.style.opacity=(value-730)/100 * 2;
+            }
+
+            if( (value-730) * 1.5 > 10){
+                support.style.right="10px";
+                supportp.style.opacity=10;
+            }
+            
+            if(value>1230){
+                support.style.right=(-1.5)*(value-1230)+"px";
+                supportp.style.opacity=10-(value-900)/100 * 2;
+            }
+        }
+        else{
+            support.style.right="0px";
+            supportp.style.opacity=10;
+        }
+    })
+
+
+    </script>
+
+    
+    
 {% endblock %}

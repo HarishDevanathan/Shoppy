@@ -1,0 +1,120 @@
+*{
+    max-width: 1440px;
+}
+body{
+    background-color: black;
+}
+.company-description{
+    background-color: black;
+    border:2px solid blue;
+    border-radius: 15px;
+    color:white;
+    margin:2px;
+    box-shadow: 0px 0px 15px 5px blue;
+    padding:5px;
+}
+
+.main img {
+    width: 100%; 
+    height: auto; 
+    max-width: 300px; 
+}
+
+#deliveryboy{
+    position:relative;
+    left:-800px;
+}
+
+#deliveryboypara{
+    opacity:0;
+    color:white;
+    border:2px solid red;
+    box-shadow: 0px 0px 15px 5px red;
+    border-radius: 10px;
+    margin:10px;
+    font-size: 18px;
+}
+
+#cart{
+    position:relative;
+    right:-800px;
+}
+
+#cartpara{
+    border:2px solid white;
+    border-radius: 10px;
+    margin:5px;
+    color:white;
+    font-size:18px;
+    border:2px solid yellow;
+    box-shadow: 0px 0px 15px 5px yellow;
+    padding:10px;
+    opacity: 0;
+}
+
+#seller{
+    position:relative;
+    left:-800px;
+}
+#sellerpara{
+    opacity: 0;
+    border:2px solid lightgreen;
+    border-radius: 10px;
+    margin:5px;
+    color:white;
+    font-size:18px;
+    box-shadow: 0px 0px 15px 5px lightgreen;
+}
+#support{
+    position:relative;
+    right:-800px;
+}
+#supportpara{
+    opacity: 0;
+    border:2px solid violet;
+    border-radius: 10px;
+    margin:5px;
+    color:white;
+    box-shadow: 0px 0px 15px 5px violet;
+    font-size:18px;
+}
+
+#join{
+    border:2px solid red;
+}
+
+#join:hover{
+    box-shadow: 0px 0px 15px 5px red;
+}
+
+#cart-button{
+    border:2px solid yellow;
+    color:brown;
+}
+
+#cart-button:hover{
+    box-shadow: 0px 0px 15px 5px yellow;
+}
+
+#seller-button{
+    border:2px solid lightgreen;
+    color:antiquewhite;
+}
+
+#seller-button:hover{
+    box-shadow: 0px 0px 15px 5px lightgreen;
+}
+
+#support-button{
+    background-color: rgb(147, 3, 147);
+    border:2px solid violet;
+    color:lightblue;
+}
+
+#support-button:hover{
+    box-shadow: 0px 0px 15px 5px violet;
+}
+
+#support-button:active{
+    opacity: 3;
+}
