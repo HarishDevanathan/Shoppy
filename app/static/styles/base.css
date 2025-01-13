@@ -1,0 +1,76 @@
+body{
+    font-family:"Montserrat";
+    background-color: white;
+}
+
+.navbar-brand{
+    font-size:40px;
+    color:white;
+    font-weight: normal;
+}
+
+.navbar-brand:hover{
+    color:lightblue;
+}
+
+.navbar{
+    background-color: black;
+    color:red;
+    position: fixed;
+    width:100%;
+    height:15%;
+    margin-left:0px; 
+}
+
+
+
+.navbar-toggler{
+    background-color: white;
+    margin-right:10px;
+}
+
+.navbar-toggler:hover{
+    background-color: lightblue;
+}
+
+.navbar-toggler:active{
+    background-color:rgb(124, 206, 234)
+}
+
+.nav-item {
+    position: relative;
+    display: inline-block;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+
+.nav-item:hover {
+    color: #f0a500;
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #f0a500; 
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-item:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+@media screen and (max-width:767px ) {
+    .navbar{
+        height:auto ;
+    }
+}
