@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 from flask import Flask, render_template, request, redirect
->>>>>>> 51ac05da4eb49e5213751e9fb8b4dafb8e6003e0
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__, template_folder='../templates')
