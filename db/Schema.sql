@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `user_data`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_data` (
   `username` varchar(100) NOT NULL,
-  `pass` varchar(500) DEFAULT NULL,
+  `passw` varchar(500) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `phno` varchar(15) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
@@ -38,7 +38,8 @@ CREATE TABLE `user_data` (
   `hist` json DEFAULT NULL,
   PRIMARY KEY (`username`),
   UNIQUE KEY `id` (`id`),
-  UNIQUE KEY `email` (`email`)
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `phno` (`phno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-14 18:10:40
+-- Dump completed on 2025-01-14 22:16:36
