@@ -29,7 +29,7 @@ def login():
         
         check_user = user_data.query.filter_by(username=username).first()
         if check_user:
-            if check_user.passw == password:
+            if check_password_hash(check_user.passw, password):  # Access the user's hashed password
                 return redirect(url_for('welcome', username=username))
             else:
                 return 'Invalid credentials'
