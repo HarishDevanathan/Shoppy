@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for
 from forms import LoginForm
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import user,db
+from models import user_data,db
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -27,7 +27,7 @@ def login():
         username = form.username.data
         password = form.password.data
         
-        check_user = user.query.filter_by(username=username).first()
+        check_user = user_data.query.filter_by(username=username).first()
         if check_user:
             if check_user.passw == password:
                 return redirect(url_for('welcome', username=username))
