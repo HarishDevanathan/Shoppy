@@ -21,7 +21,7 @@
                         </center>
                         <img src="../static/images/logoupscaled.png">
                         <center>
-                            <p class="fs-4 fs-sm-5 fs-md-6 fs-lg-7 fs-xl-8" style="color:white"> "The only thing we dont ship is your regret 😉"</p>
+                            <p class="fs-4 fs-sm-5 fs-md-6 fs-lg-7 fs-xl-8" style="color:red"> "The only thing we dont ship is your regret 😉"</p>
                         </center>
                     </div>
                 </div>
@@ -29,42 +29,46 @@
             <div class="col-md-6 innerlog d-flex justify-content-center align-items-center" style="background-color: white;">
                 <div class="login-block justify-content-center d-block mx-auto">
                     <h1 class="text-center p-3">LOGIN</h1>
-                    <form autocomplete="off">
-                        <label for="username" id="userlabel">username</label>
-                        <input name="username" id="username">
-                        <label for="password" id="passlabel">password</label>
-                        <input name="password" id="password" type="password">
-                        <button class="mt-4 ms-3 ps-3 pe-3 mb-3">confirm</button>
-                        <p class="text-center">Dont have an account ? </p>
+                    <form method="POST" action="{{ url_for('login') }}" autocomplete="off">
+                        {{ form.hidden_tag() }}
+                        <div class="form-group">
+                            <label for="username" id="userlabel">Username</label>
+                            {{ form.username(class="form-control", id="username") }}
+                        </div>
+                        <div class="form-group">
+                            <label for="password" id="passlabel">Password</label>
+                            {{ form.password(class="form-control", id="password", type="password") }}
+                        </div>
+                        <button class="mt-4 ms-3 ps-3 pe-3 mb-3 btn btn-primary" type="submit">Confirm</button>
+                        <p class="text-center">Don't have an account?</p>
                         <a href="#" class="text-center d-block mx-auto">Sign Up</a>
-                        <button class="text-center d-block mx-auto mt-2 p-2">forgot password</button>
+                        <button class="text-center d-block mx-auto mt-2 p-2 btn btn-primary">Forgot password</button>
                     </form>
                 </div>
             </div>
-            
         </div>
     </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
-    username=document.getElementById('userlabel');
-    password=document.getElementById('passlabel');
+    username = document.getElementById('userlabel');
+    password = document.getElementById('passlabel');
 
-    document.getElementById('username').addEventListener('focus',()=>{
-        username.style.color="black";
+    document.getElementById('username').addEventListener('focus', () => {
+        username.style.color = "black";
     })
 
-    document.getElementById('username').addEventListener('blur', ()=>{
-        username.style.color="rosybrown"
+    document.getElementById('username').addEventListener('blur', () => {
+        username.style.color = "rosybrown"
     });
 
-    document.getElementById('password').addEventListener('focus',()=>{
-        password.style.color="black";
+    document.getElementById('password').addEventListener('focus', () => {
+        password.style.color = "black";
     })
 
-    document.getElementById('password').addEventListener('blur', ()=>{
-        password.style.color="rosybrown"
+    document.getElementById('password').addEventListener('blur', () => {
+        password.style.color = "rosybrown"
     });
 </script>
 </html>

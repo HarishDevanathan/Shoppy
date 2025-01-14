@@ -23,11 +23,23 @@ DROP TABLE IF EXISTS `user_data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_data` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
+  `username` varchar(100) NOT NULL,
+  `pass` varchar(500) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `phno` varchar(15) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `doj` date DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `id` varchar(11) DEFAULT NULL,
+  `cart` json DEFAULT NULL,
+  `orders` json DEFAULT NULL,
+  `wallet` int DEFAULT NULL,
+  `products` json DEFAULT NULL,
+  `hist` json DEFAULT NULL,
+  PRIMARY KEY (`username`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +48,6 @@ CREATE TABLE `user_data` (
 
 LOCK TABLES `user_data` WRITE;
 /*!40000 ALTER TABLE `user_data` DISABLE KEYS */;
-INSERT INTO `user_data` VALUES (1,'John Doe','john.doe@example.com'),(2,'Harish','harish2310136@ssn.edu.in'),(3,'Harish','harishdevanathan123@gmail.com'),(4,'Harish D','harishdevanathan123@gmail.com'),(5,'Harish D','harishdevanathan123@gmail.com'),(6,'sigma','skibidrizzler@gmail.com');
 /*!40000 ALTER TABLE `user_data` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-13 22:33:44
+-- Dump completed on 2025-01-14 18:10:40
