@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 db=SQLAlchemy()
 
-class user(db.Model):
+class user_data(db.Model):
     __tablename___="user_data"
     username=db.Column(db.String(100),primary_key=True)
     passw=db.Column(db.String(500))
