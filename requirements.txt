@@ -3,3 +3,4 @@ flask-mysql
 flask-sqlalchemy
 flask-wtf
 flask-bootstrap
+Flask-Mail

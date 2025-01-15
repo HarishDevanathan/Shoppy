@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField
-from wtforms.validators import DataRequired,Length,Required,Regexp,Email
+from wtforms.validators import DataRequired,Length,Regexp,Email
 
 
 class LoginForm(FlaskForm):
@@ -10,7 +10,7 @@ class LoginForm(FlaskForm):
     
 
 class SignForm(FlaskForm):
-    username = StringField('username', validators=[Required(), Length(1, 100), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,'Usernames must have only letters, ''numbers, dots or underscores')])
+    username = StringField('username', validators=[DataRequired(), Length(1, 100), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,'Usernames must have only letters, ''numbers, dots or underscores')])
     password = PasswordField('uassword', validators=[
         DataRequired(),
         Length((8,16), message='Password must be between 8 to 16 characters long'),
