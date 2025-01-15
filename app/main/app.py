@@ -56,9 +56,11 @@ def signup():
         username = form.username.data
         password = form.password.data
         phno = form.phno.data
+        countrycode=form.countrycode.data
         address = form.address.data
         age= form.age.data
         uid=generate_id()
+        full_phno=phno+countrycode
         
         check_username = user_data.query.filter_by(username=username).first()
         check_phno=user_data.query.filter_by(phno=phno).first()
@@ -69,7 +71,7 @@ def signup():
                 return 'Phone number already exist'
             else:
                 hashed_password = generate_password_hash(password)
-                new_user = user_data(username=username,passw=hashed_password,email=email,phno=phno,address=address,age=age,id=uid,cart=[],orders=[], wallet=0,products=[],hist=[])
+                new_user = user_data(username=username,passw=hashed_password,email=email,phno=full_phno,address=address,age=age,id=uid,cart=[],orders=[], wallet=0,products=[],hist=[])
                 db.session.add(new_user)
                 db.session.commit()
                 return redirect(url_for('welcome', username=username))
