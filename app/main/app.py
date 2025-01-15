@@ -58,11 +58,7 @@ def signup():
         phno = form.phno.data
         address = form.address.data
         age= form.age.data
-        uid=generate_uid()
-        check_uid=user_data.query.filter_by(uid=uid).first()
-        while check_uid:
-            uid=generate_uid()
-            check_uid=user_data.query.filter_by(uid=uid).first()
+        uid=generate_id()
         
         check_username = user_data.query.filter_by(username=username).first()
         check_phno=user_data.query.filter_by(phno=phno).first()
@@ -73,7 +69,7 @@ def signup():
                 return 'Phone number already exist'
             else:
                 hashed_password = generate_password_hash(password)
-                new_user = user_data(username=username,password=hashed_password,email=email,phno=phno,address=address,age=age,id=uid,cart=[],orders=[], wallet=0,products=[],hist=[])
+                new_user = user_data(username=username,passw=hashed_password,email=email,phno=phno,address=address,age=age,id=uid,cart=[],orders=[], wallet=0,products=[],hist=[])
                 db.session.add(new_user)
                 db.session.commit()
                 return redirect(url_for('welcome', username=username))
@@ -85,8 +81,7 @@ def welcome(username):
     return render_template('homepage.html',username=username)
 
 
-@app.route('/generate_uid',methods=['GET'])
-def generate_uid():
+def generate_id():
     with app.app_context():
         id=user_data.generate_uid()
     return id
