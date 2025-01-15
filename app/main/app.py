@@ -43,5 +43,12 @@ def login():
 def welcome(username):
     return render_template('homepage.html',username=username)
 
+
+@app.route('/generate_uid',methods=['GET'])
+def generate_uid():
+    with app.app_context():
+        id=user_data.generate_uid()
+    return f'uid generated successfully {id} '
+
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(debug=True,port=5000)
