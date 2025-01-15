@@ -29,7 +29,9 @@ def login():
         
         check_user = user_data.query.filter_by(username=username).first()
         if check_user:
-            if check_password_hash(check_user.passw, password):  # Access the user's hashed password
+            if check_password_hash(check_user.passw, password):
+                form.username.data=''
+                form.password.data=''
                 return redirect(url_for('welcome', username=username))
             else:
                 return 'Invalid credentials'
@@ -37,13 +39,20 @@ def login():
             return "Username doesn't exist"
     return render_template("loginpage.html", form=form)
 
-@app.route('/welcome/<username>')
+@app.route('/home/<username>')
 def welcome(username):
-    return f'Welcome {username}'
+    return render_template('homepage.html',username=username)
+
+
+@app.route('/generate_uid',methods=['GET'])
+def generate_uid():
+    with app.app_context():
+        id=user_data.generate_uid()
+    return f'uid generated successfully {id} '
 
 @app.route('/signup',methods=['GET','POST'])
 def signup():
     return render_template("signup.html")
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(debug=True,port=5000)

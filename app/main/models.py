@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import or_
+import random
 db=SQLAlchemy()
 
 class user_data(db.Model):
@@ -19,3 +21,22 @@ class user_data(db.Model):
 
     def __repr__(self):
         return f'{self.username}'
+    
+    @staticmethod
+    def generate_uid():
+        random_number=random.randint(10000000,99999999)
+        while(True):
+            cust='01-'+str(random_number)
+            sel='02-'+str(random_number)
+            check_user=user_data.query.filter(or_(user_data.id==cust,user_data.id==sel)).first()
+            if(not check_user):
+                return cust
+            random_number=random.randint(10000000,99999999)
+
+    
+
+
+
+            
+
+
