@@ -20,5 +20,10 @@
 }
 
 .imgslide img{
+    background-color: black;
     object-fit: contain;
+    width: 65%;
+    height:40vh;
+    margin-top:20px;
+    border-radius: 10px;
 }
