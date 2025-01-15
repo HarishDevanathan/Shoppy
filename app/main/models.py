@@ -10,7 +10,7 @@ class user_data(db.Model):
     email=db.Column(db.String(100))
     phno=db.Column(db.String(15))
     address=db.Column(db.String(100),unique=True)
-    doj=db.Column(db.Date)
+    doj=db.Column(db.Date,default=date.today)
     age=db.Column(db.Integer)
     id=db.Column(db.String(11),nullable=False,unique=True)
     cart=db.Column(db.JSON)

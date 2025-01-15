@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for
-from forms import LoginForm
+from forms import LoginForm,SignupForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import user_data,db
 from flask_sqlalchemy import SQLAlchemy
@@ -39,6 +39,37 @@ def login():
             return "Username doesn't exist"
     return render_template("loginpage.html", form=form)
 
+@app.route('/signup',methods=['GET','POST'])
+def signup():
+    form=SignupForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        phno = form.phno.data
+        address = form.address.data
+        age= form.age.data
+        uid=generate_uid()
+        check_uid=user_data.query.filter_by(uid=uid).first()
+        while check_uid:
+            uid=generate_uid()
+            check_uid=user_data.query.filter_by(uid=uid).first()
+        
+        check_username = user_data.query.filter_by(username=username).first()
+        check_phno=user_data.query.filter_by(phno=phno).first()
+        
+        if check_username:
+            return 'Username already taken'
+            if check_phno:
+                return 'Phone number already exist'
+            else:
+                hashed_password = generate_password_hash(password)
+                new_user = user_data(username=username,password=hashed_password,email=email,phno=phno,address=address,age=age,id=uid,cart=[],orders=[], wallet=0,products=[],hist=[])
+                db.session.add(new_user)
+                db.session.commit()
+                return redirect(url_for('welcome', username=username))
+
+    return render_template("signup.html")
+
 @app.route('/home/<username>')
 def welcome(username):
     return render_template('homepage.html',username=username)
@@ -48,11 +79,7 @@ def welcome(username):
 def generate_uid():
     with app.app_context():
         id=user_data.generate_uid()
-    return f'uid generated successfully {id} '
-
-@app.route('/signup',methods=['GET','POST'])
-def signup():
-    return render_template("signup.html")
+    return id
 
 if __name__ == "__main__":
     app.run(debug=True,port=5000)
