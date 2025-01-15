@@ -54,12 +54,6 @@ def welcome(username):
     return render_template('homepage.html',username=username)
 
 
-@app.route('/generate_uid',methods=['GET'])
-def generate_uid():
-    with app.app_context():
-        id=user_data.generate_uid()
-    return f'uid generated successfully {id} '
-
 @app.route('/signup',methods=['GET','POST'])
 def signup():
     return render_template("signup.html")
@@ -70,4 +64,4 @@ def send_email_route():
     return 'Email Sent'
 
 if __name__ == "__main__":
-    app.run(debug=True,port=5000)
+    app.run(debug=True,port=5001)
