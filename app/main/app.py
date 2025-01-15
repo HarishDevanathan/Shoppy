@@ -85,17 +85,16 @@ def welcome(username):
     return render_template('homepage.html',username=username)
 
 
-<<<<<<< HEAD
 @app.route('/generate_uid',methods=['GET'])
 def generate_uid():
     with app.app_context():
         id=user_data.generate_uid()
     return id
-=======
+
 @app.route('/signup',methods=['GET','POST'])
 def signup():
     return render_template("signup.html")
->>>>>>> 8f4078fdd144be92867c9c1465fc7326680ad872
+
 
 @app.route('/send-email')
 def send_email_route():
