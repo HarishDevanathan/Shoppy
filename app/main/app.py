@@ -41,5 +41,9 @@ def login():
 def welcome(username):
     return f'Welcome {username}'
 
+@app.route('/signup',methods=['GET','POST'])
+def signup():
+    return render_template("signup.html")
+
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
