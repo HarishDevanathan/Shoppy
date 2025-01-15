@@ -91,11 +91,6 @@ def generate_uid():
         id=user_data.generate_uid()
     return id
 
-@app.route('/signup',methods=['GET','POST'])
-def signup():
-    return render_template("signup.html")
-
-
 @app.route('/send-email')
 def send_email_route():
     send_email('This is a test mail',['ganeshkumar78602005@gmail.com','harishdevanathan123@gmail.com'])

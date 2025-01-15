@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
 import random
+from datetime import date
 db=SQLAlchemy()
 
 class user_data(db.Model):
