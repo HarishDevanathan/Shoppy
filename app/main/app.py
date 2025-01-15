@@ -98,7 +98,7 @@ def signup():
 
 @app.route('/send-email')
 def send_email_route():
-    send_email('This is a test mail',['ganeshkumar78602005@gmail.com'])
+    send_email('This is a test mail',['ganeshkumar78602005@gmail.com','harishdevanathan123@gmail.com'])
     return 'Email Sent'
 
 if __name__ == "__main__":
