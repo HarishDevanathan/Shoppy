@@ -1,0 +1,24 @@
+
+.homenav{
+    border-radius:10px;
+    background-color:red;
+    padding:4px;
+}
+.homenav button{
+    color:white;
+    transition:0.5s;
+}
+.homenav button:hover{
+    color:blue;
+    transition:0.5s;
+}
+
+.homenav input{
+    border-radius:10px;
+    border:2px solid black;
+
+}
+
+.imgslide img{
+    object-fit: contain;
+}

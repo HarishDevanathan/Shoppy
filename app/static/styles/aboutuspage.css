@@ -118,3 +118,10 @@ body{
 #support-button:active{
     opacity: 3;
 }
+
+@media (max-width: 940px) {
+    .row > .col {
+        flex: 0 0 100%; 
+        max-width: 100%; 
+    }
+}
