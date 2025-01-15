@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for
-from forms import LoginForm,SignupForm
+from forms import LoginForm,SignForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import user_data,db
 from flask_sqlalchemy import SQLAlchemy
