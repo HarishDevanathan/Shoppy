@@ -30,13 +30,13 @@ CREATE TABLE `user_data` (
   `address` varchar(100) DEFAULT NULL,
   `doj` date DEFAULT NULL,
   `age` int DEFAULT NULL,
-  `id` varchar(11) DEFAULT NULL,
+  `id` varchar(11) NOT NULL,
   `cart` json DEFAULT NULL,
   `orders` json DEFAULT NULL,
   `wallet` int DEFAULT NULL,
   `products` json DEFAULT NULL,
   `hist` json DEFAULT NULL,
-  PRIMARY KEY (`username`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `phno` (`phno`)
@@ -62,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-14 23:29:58
+-- Dump completed on 2025-01-16 17:23:19
