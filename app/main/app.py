@@ -5,7 +5,7 @@ from models import user_data,db
 from flask_sqlalchemy import SQLAlchemy
 from mails import send_email,init_mail
 from flask import Flask, render_template, redirect, url_for
-
+from datetime import date
 
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
@@ -64,7 +64,6 @@ def signup():
         uid = generate_id()
         full_phno = countrycode + phno  
 
-        # Debugging: Print data to the console
         print(f"Username: {username}, Phone: {full_phno}, Email: {email}, Age: {age}, Address: {address}")
         
         check_username = user_data.query.filter_by(username=username).first()
@@ -82,6 +81,7 @@ def signup():
             email=email,
             phno=full_phno,
             address=address,
+            date=date.today,
             age=age,
             id=uid,
             cart=[],
