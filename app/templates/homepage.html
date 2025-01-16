@@ -56,34 +56,52 @@
 
 <script>
     let currentIndex = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
-const totalSlides = slides.length;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const totalSlides = slides.length;
 
-function moveToSlide(index) {
-    index = (index + totalSlides) % totalSlides;
-    document.querySelector('.slides').style.transform = `translateX(-${index * 100}%)`;
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[index].classList.add('active');
-    currentIndex = index;
-}
+    function moveToSlide(index) {
+        index = (index + totalSlides) % totalSlides;
+        document.querySelector('.slides').style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+        currentIndex = index;
+    }
 
-setInterval(() => {
-    currentIndex = (currentIndex + 1) % totalSlides;
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        moveToSlide(currentIndex);
+    }, 5000);
+
+    document.getElementById('prev').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        moveToSlide(currentIndex);
+    });
+
+    document.getElementById('next').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        moveToSlide(currentIndex);
+    });
+
     moveToSlide(currentIndex);
-}, 5000);
 
-document.getElementById('prev').addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-    moveToSlide(currentIndex);
-});
-
-document.getElementById('next').addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % totalSlides;
-    moveToSlide(currentIndex);
-});
-
-moveToSlide(currentIndex);
+    document.addEventListener('DOMContentLoaded', function () {
+            sessionStorage.setItem('currentPage', window.location.pathname);
+            window.addEventListener('popstate', function () {
+                if (sessionStorage.getItem('currentPage') === '/home') {
+                    fetch('/clear-session', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => {
+                        if (response.ok) {
+                            console.log("Session cleared successfully.");
+                        }
+                    });
+                }
+            });
+        });
 
 </script>
 {% endblock %}
