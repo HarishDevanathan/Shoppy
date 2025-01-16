@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from models import user_data,db
 from flask_sqlalchemy import SQLAlchemy
 from mails import send_email,init_mail
+from flask import Flask, render_template, redirect, url_for
 
 
 
@@ -49,35 +50,53 @@ def login():
             return "Username doesn't exist"
     return render_template("loginpage.html", form=form)
 
-@app.route('/signup',methods=['GET','POST'])
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    form=SignupForm()
+    form = SignupForm()
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-        email=form.email.data
+        email = form.email.data
         phno = form.phno.data
-        countrycode=form.countrycode.data
-        address = form.address.data
-        age= form.age.data
-        uid=generate_id()
-        full_phno=countrycode + phno
+        countrycode = form.countrycode.data  
+        address = form.address.data  
+        age = form.age.data
+        uid = generate_id()
+        full_phno = countrycode + phno  
+
+        # Debugging: Print data to the console
+        print(f"Username: {username}, Phone: {full_phno}, Email: {email}, Age: {age}, Address: {address}")
         
         check_username = user_data.query.filter_by(username=username).first()
-        check_phno=user_data.query.filter_by(phno=phno).first()
+        check_phno = user_data.query.filter_by(phno=full_phno).first() 
         
         if check_username:
-            return 'Username already taken'
-            if check_phno:
-                return 'Phone number already exist'
-            else:
-                hashed_password = generate_password_hash(password)
-                new_user = user_data(username=username,passw=hashed_password,email=email,phno=full_phno,address=address,age=age,id=uid,cart=[],orders=[], wallet=0,products=[],hist=[])
-                db.session.add(new_user)
-                db.session.commit()
-                return redirect(url_for('welcome', username=username))
+            return 'Username already taken' 
+        if check_phno:
+            return 'Phone number already exists'  
+        
+        hashed_password = generate_password_hash(password)
+        new_user = user_data(
+            username=username,
+            passw=hashed_password,
+            email=email,
+            phno=full_phno,
+            address=address,
+            age=age,
+            id=uid,
+            cart=[],
+            orders=[],
+            wallet=0,
+            products=[],
+            hist=[]
+        )
+        db.session.add(new_user)
+        db.session.commit()
 
-    return render_template("signup.html",form=form)
+        return redirect(url_for('welcome', username=username))
+
+    return render_template("signup.html", form=form)
+
 
 @app.route('/home/<username>')
 def welcome(username):
