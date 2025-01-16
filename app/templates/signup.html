@@ -138,8 +138,8 @@
                             {{ form.email(class="form-control", id="email", type="email") }}
                         </div>
                         <div class="form-group mb-3">
-                            <label for="age" id="agelabel">Age</label>
-                            {{ form.age(class="form-control", id="age", type="number") }}
+                            <label for="address" id="addresslabel">Address</label>
+                            {{ form.address(class="form-control", id="address") }}
                         </div>
                         <button class="btn btn-primary mt-1 ms-3 ps-3 pe-3 mb-3" type="submit">Confirm</button>
                         <p class="text-center">Already have an account?</p>
@@ -159,7 +159,7 @@
         password = document.getElementById('passlabel');
         phno = document.getElementById('phlabel');
         email = document.getElementById('emaillabel');
-        age = document.getElementById('agelabel');
+        address = document.getElementById('addresslabel');
     
         document.getElementById('username').addEventListener('focus', () => {
             username.style.color = "black";
@@ -193,11 +193,11 @@
                 email.style.color = "rosybrown"
         });
     
-        document.getElementById('age').addEventListener('focus', () => {
+        document.getElementById('address').addEventListener('focus', () => {
             age.style.color = "black";
         })
     
-        document.getElementById('age').addEventListener('blur', () => {
+        document.getElementById('address').addEventListener('blur', () => {
             age.style.color = "rosybrown"
         });
     </script>

@@ -75,13 +75,9 @@ def signup():
         phno = form.phno.data
         countrycode = form.countrycode.data
         address = form.address.data
-        age = form.age.data
         uid = generate_id()
         full_phno = countrycode + phno
 
-
-        print(f"Username: {username}, Phone: {full_phno}, Email: {email}, Age: {age}, Address: {address}")
-        
         check_username = user_data.query.filter_by(username=username).first()
         check_phno = user_data.query.filter_by(phno=full_phno).first()
 
@@ -99,8 +95,7 @@ def signup():
             email=email,
             phno=full_phno,
             address=address,
-            date=date.today,
-            age=age,
+            doj=date.today(),
             id=uid,
             cart=[],
             orders=[],
@@ -112,6 +107,8 @@ def signup():
         db.session.commit()
         flash("Signup successful! Please log in.", "success")
         return redirect(url_for('login'))
+    else:
+        print(form.errors) 
     return render_template("signup.html", form=form)
 
 
