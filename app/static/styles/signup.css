@@ -3,6 +3,7 @@ body, html {
     padding: 0;
     width: 100%;
     font-family: "Montserrat";
+    overflow: hidden;
 }
 
 .signcont {
@@ -20,7 +21,7 @@ body, html {
     justify-content: center;
     align-items: center;
     height: 670px;
-    width: 380px;
+    width: 420px;
     border-radius: 15px;
     box-shadow: 0 4px 8px grey, 0 -4px 8px grey, 4px 0 8px grey, -4px 0 8px grey;
     position: relative; 
