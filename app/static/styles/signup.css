@@ -122,19 +122,24 @@ body, html {
 }
 
 @media (max-width: 768px) {
-    .signup-block {
-        padding: 20px;
-        width: 90%; 
-        box-shadow: none;
-        height: auto;
-        margin-top: 10%;
+    body{
+        overflow-y: hidden;
     }
-
+    .signup-block {
+        margin-top: 2%;
+        height: auto; 
+        max-height: 660px;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px grey, 0 -4px 8px grey, 4px 0 8px grey, -4px 0 8px grey;
+    }
+    
     .signup-block .input-group .form-select,
     .signup-block .input-group .form-control {
         width: 100%;
         height:90%; 
         margin-bottom: 10px;
+        overflow-y: auto;
     }
 
     .innerlog {
