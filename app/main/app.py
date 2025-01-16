@@ -1,20 +1,18 @@
 from flask import Flask, render_template, redirect, url_for, session, flash, request
 from forms import LoginForm, SignupForm
 from werkzeug.security import generate_password_hash, check_password_hash
-<<<<<<< HEAD
 from models import user_data,db
 from flask_sqlalchemy import SQLAlchemy
 from mails import send_email,init_mail
 from flask import Flask, render_template, redirect, url_for
 from datetime import date
 
-=======
 from models import user_data, db
 from mails import send_email, init_mail
 from datetime import timedelta
 import webbrowser
 from sqlalchemy import func
->>>>>>> f7b05d11886754b35aa207314b90759952ee1069
+
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
 app.config['SECRET_KEY'] = "This_is_a_secret_key_@123!@#"
@@ -81,11 +79,9 @@ def signup():
         uid = generate_id()
         full_phno = countrycode + phno
 
-<<<<<<< HEAD
+
         print(f"Username: {username}, Phone: {full_phno}, Email: {email}, Age: {age}, Address: {address}")
         
-=======
->>>>>>> f7b05d11886754b35aa207314b90759952ee1069
         check_username = user_data.query.filter_by(username=username).first()
         check_phno = user_data.query.filter_by(phno=full_phno).first()
 
