@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Poppins:wght@100..900&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -14,24 +14,23 @@
     <div class="container-fluid signcont">
         <div class="row justify-content-center" style="height:100vh;">
             <div class="col-md-6 bg-white innersignup d-flex justify-content-center align-items-center">
-                <div class="container-fluid justify-content-center">
-                    <div class="signup-block">
+                <div class="signup-block">
                     <h1 class="text-center p-3">SIGNUP</h1>
                     <form method="POST" action="{{url_for('signup')}}" autocomplete="off">
                         {{ form.hidden_tag() }}
-                        <div class="form-group">
-                            <label for="username" id="username">Username</label>
+                        <div class="form-group mb-3">
+                            <label for="username" id="userlabel">Username</label>
                             {{ form.username(class="form-control", id="username") }}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="password" id="passlabel">Password</label>
                             {{ form.password(class="form-control", id="password", type="password") }}
                         </div>
-                        <div class="form-group">
-                            <label for="phno" id="phno">Phone number</label>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                <select class="form-control" id="countryCode" name="countryCode">
+
+                        <div class="form-group mb-3">
+                            <label for="phno" id="phlabel">Phone number</label>
+                            <div class="input-group">
+                                <select class="form-select" id="countryCode" name="countryCode">
                                     <option value="+91" selected>+91</option>
                                     <option value="+86">+86</option>
                                     <option value="+61">+61</option>
@@ -130,88 +129,78 @@
                                     <option value="+976">+976</option>
                                     <option value="+382">+382</option>
                                 </select>
-                                </div>
-                                <div class="col-md-9 ph">
-                                    {{ form.phno(class="form-control", id="phno") }}
-                                </div>
-                                
-
+                                {{ form.phno(class="form-control", id="phno") }}
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email" id="email">Email</label>
+
+                        <div class="form-group mb-3">
+                            <label for="email" id="emaillabel">Email</label>
                             {{ form.email(class="form-control", id="email", type="email") }}
                         </div>
-                        <div class="form-group">
-                            <label for="age" id="age">Age</label>
-                            {{ form.age(class="form-control", id="age",type="number") }}
+                        <div class="form-group mb-3">
+                            <label for="age" id="agelabel">Age</label>
+                            {{ form.age(class="form-control", id="age", type="number") }}
                         </div>
-                        <button class="mt-1 ms-3 ps-3 pe-3 mb-3 btn btn-primary" type="submit">Confirm</button>
+                        <button class="btn btn-primary mt-1 ms-3 ps-3 pe-3 mb-3" type="submit">Confirm</button>
                         <p class="text-center">Already have an account?</p>
-                        <a href="/login" class="text-center d-block mx-auto">Login</a>
-                    </div>
-                   
+                        <a href="/login" class="text-center d-block">Login</a>
                     </form>
-      
                 </div>
             </div>
-
             <div class="col-md-6 innerlog d-flex justify-content-center align-items-center" style="background-color: black;">
-                <div class="login-block justify-content-center d-block mx-auto">
                 
-                </div>
             </div>
         </div>
     </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        username = document.getElementById('userlabel');
+        password = document.getElementById('passlabel');
+        phno = document.getElementById('phlabel');
+        email = document.getElementById('emaillabel');
+        age = document.getElementById('agelabel');
     
+        document.getElementById('username').addEventListener('focus', () => {
+            username.style.color = "black";
+        })
+    
+        document.getElementById('username').addEventListener('blur', () => {
+            username.style.color = "rosybrown"
+        });
+    
+        document.getElementById('password').addEventListener('focus', () => {
+            password.style.color = "black";
+        })
+    
+        document.getElementById('password').addEventListener('blur', () => {
+            password.style.color = "rosybrown"
+        });
+    
+        document.getElementById('phno').addEventListener('focus', () => {
+            phno.style.color = "black";
+        })
+    
+        document.getElementById('phno').addEventListener('blur', () => {
+            phno.style.color = "rosybrown"
+        });
+    
+        document.getElementById('email').addEventListener('focus', () => {
+            email.style.color = "black";
+        })
+    
+        document.getElementById('email').addEventListener('blur', () => {
+                email.style.color = "rosybrown"
+        });
+    
+        document.getElementById('age').addEventListener('focus', () => {
+            age.style.color = "black";
+        })
+    
+        document.getElementById('age').addEventListener('blur', () => {
+            age.style.color = "rosybrown"
+        });
+    </script>
+
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script>
-    username = document.getElementById('username');
-    password = document.getElementById('passlabel');
-    phno = document.getElementById('phno');
-    email = document.getElementById('email');
-    age = document.getElementById('age');
-
-    document.getElementById('username').addEventListener('focus', () => {
-        username.style.color = "black";
-    })
-
-    document.getElementById('username').addEventListener('blur', () => {
-        username.style.color = "rosybrown"
-    });
-
-    document.getElementById('password').addEventListener('focus', () => {
-        password.style.color = "black";
-    })
-
-    document.getElementById('password').addEventListener('blur', () => {
-        password.style.color = "rosybrown"
-    });
-
-    document.getElementById('phno').addEventListener('focus', () => {
-        phno.style.color = "black";
-    })
-
-    document.getElementById('phno').addEventListener('blur', () => {
-        phno.style.color = "rosybrown"
-    });
-
-    document.getElementById('email').addEventListener('focus', () => {
-        email.style.color = "black";
-    })
-
-    document.getElementById('email').addEventListener('blur', () => {
-            email.style.color = "rosybrown"
-    });
-
-    document.getElementById('age').addEventListener('focus', () => {
-        age.style.color = "black";
-    })
-
-    document.getElementById('age').addEventListener('blur', () => {
-        age.style.color = "rosybrown"
-    });
-</script>
 </html>

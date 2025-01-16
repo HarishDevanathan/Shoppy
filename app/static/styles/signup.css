@@ -2,8 +2,8 @@ body, html {
     margin: 0;
     padding: 0;
     width: 100%;
-    font-family: "Montserrat";
-    overflow: hidden;
+    height: 100%;
+    font-family: "Montserrat", sans-serif;
 }
 
 .signcont {
@@ -11,30 +11,35 @@ body, html {
     height: 100%;
 }
 
-.innersignup {
+.innersignup, .innerlog {
     height: 100%;
 }
 
 .signup-block {
     margin-top: 1%;
-    margin-left: 20%;
     justify-content: center;
     align-items: center;
-    height: 670px;
-    width: 420px;
+    height: 680px; 
+    width: 500px; 
+    padding: 20px; 
     border-radius: 15px;
     box-shadow: 0 4px 8px grey, 0 -4px 8px grey, 4px 0 8px grey, -4px 0 8px grey;
     position: relative; 
+    background-color: white; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.signup-block h1 {
+    color: black;
+    text-align: center;
 }
 
 .signup-block label {
-    font-size: medium;
-    display: block;
-    margin-top: 1px;
+    font-size: 1rem;
     margin-left: 15px;
     color: rosybrown;
 }
-
 
 .signup-block button {
     position: relative;
@@ -42,7 +47,7 @@ body, html {
     border: none;
     border-radius: 30px;
     padding: 7px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     background: white;
     color: black;
     font-size: 16px;
@@ -76,41 +81,63 @@ body, html {
     background-color: grey;
 }
 
-.signup-block input {
-    height: 40px;
+.signup-block input, .signup-block select {
+    padding: 12px;
+    border: 2px solid rosybrown;
+    border-radius: 5px;
+    color: black;
     width: 90%;
-    margin-left: 15px;
-    margin-bottom: 25px;
-    border-radius: 5px;
-}
-
-.signup-block input:valid {
-    border: 2px red solid;
-    border-radius: 5px;
-}
-
-.signup-block input:invalid {
-    border: 2px blue solid;
-}
-
-select {
     height: 40px;
-    width: 90%;
+    margin-bottom: 15px; 
     margin-left: 15px;
-    margin-bottom: 25px;
-    border-radius: 5px;
-    color: red;
+    
 }
 
-select:invalid {
-    border: 2px blue solid;
+.signup-block input:focus, .signup-block select:focus {
+    border-color: black;
 }
 
-select:valid {
-    border: 2px red solid;
-    border-radius: 5px;
+.signup-block input:valid, .signup-block select:valid {
+    border-color: red;
 }
 
-.ph{
-    width:290px;
+.signup-block input:invalid, .signup-block select:invalid {
+    border-color:blue;
+}
+
+.signup-block .input-group .form-select {
+    max-width: 20%; 
+    font-size: 0.75rem;
+}
+
+.signup-block .input-group .form-control {
+    max-width: 70%; 
+}
+
+.innerlog {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .signup-block {
+        padding: 20px;
+        width: 90%; 
+        box-shadow: none;
+        height: auto;
+        margin-top: 10%;
+    }
+
+    .signup-block .input-group .form-select,
+    .signup-block .input-group .form-control {
+        width: 100%;
+        height:90%; 
+        margin-bottom: 10px;
+    }
+
+    .innerlog {
+        display: none;
+    }
 }
