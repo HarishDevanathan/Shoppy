@@ -1,71 +1,85 @@
-
-.homenav{
-    border-radius:10px;
-    background-color:red;
-    padding:4px;
-}
-.homenav button{
-    color:white;
-    transition:0.5s;
-}
-.homenav button:hover{
-    color:blue;
-    transition:0.5s;
+.homenav {
+    border-radius: 10px;
+    background-color: red;
+    padding: 4px;
 }
 
-.homenav input{
-    border-radius:10px;
-    border:2px solid black;
-
+.homenav button {
+    color: white;
+    transition: 0.5s;
 }
-.imgslide{
-    position:relative;
-    width:80%;
-    max-width: 800px;
-    overflow:hidden;
-    border-radius:10px;
+
+.homenav button:hover {
+    color: blue;
+    transition: 0.5s;
+}
+
+.homenav input {
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.imgslide {
+    position: relative;
+    width: 80%;
+    max-width: 740px;
     background-color: white;
+    overflow: hidden;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
 }
-.slides{
+
+.slides {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    min-height: 105%;
 }
-.slide{
+
+.slide {
     min-width: 100%;
-    box-sizing: border-box;
-}
-.slide img{
-    object-fit: contain;
-    width: 65%;
-    height:40vh;
-    margin-top:20px;
     border-radius: 10px;
+    box-sizing: border-box;
+    background-color:white;
+    object-fit: cover;
+    min-height: 100%;
 }
 
-.buttons{
-    position: abosulte;
-    top:50%;
-    width:100%;
-    display:flex;
+.slide img {
+    object-fit: contain;
+    width: 100%;
+    height: 40vh;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.buttons {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
     justify-content: space-between;
-    transform:translateY(-50%);
+    transform: translateY(-50%);
+    right:0px;
 }
 
-.buttons button{
+.buttons button {
     background-color: black;
-    color:white;
+    color: white;
     cursor: pointer;
     border-radius: 5px;
-    transition:background-color 0.3s;
+    transition: background-color 0.3s;
 }
-.buttons button:hover{
+
+.buttons button:hover {
     background-color: grey;
 }
 
-.dots{
+.dots {
     display: flex;
     justify-content: center;
-    margin:10px 0;
+    margin: 10px 0;
 }
 
 .dot {
@@ -76,4 +90,8 @@
     border-radius: 50%;
     display: inline-block;
     cursor: pointer;
+}
+
+.dot.active {
+    background-color: #717171;
 }
