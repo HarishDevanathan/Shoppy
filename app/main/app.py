@@ -61,7 +61,7 @@ def signup():
         address = form.address.data
         age= form.age.data
         uid=generate_id()
-        full_phno=phno+countrycode
+        full_phno=countrycode + phno
         
         check_username = user_data.query.filter_by(username=username).first()
         check_phno=user_data.query.filter_by(phno=phno).first()
