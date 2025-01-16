@@ -55,6 +55,7 @@ def signup():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
+        email=form.email.data
         phno = form.phno.data
         countrycode=form.countrycode.data
         address = form.address.data

@@ -11,7 +11,7 @@ class LoginForm(FlaskForm):
 
 class SignupForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(), Length(1, 100), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,'Usernames must have only letters, ''numbers, dots or underscores')])
-    password = PasswordField('uassword', validators=[
+    password = PasswordField('password', validators=[
         DataRequired(),
         Length((8,16), message='Password must be between 8 to 16 characters long'),
         Regexp(r'[A-Z]', message='Password must contain at least one uppercase letter'),
@@ -36,8 +36,9 @@ class SignupForm(FlaskForm):
     ])
 
     age = IntegerField('Age', validators=[
-        DataRequired(), 
-        NumberRange(min=10, max=100, message="You must be between 10 and 100 years old.")])
+    DataRequired(), 
+    NumberRange(Length(min=10, max=100), message="You must be between 10 and 100 years old.")
+])
 
 
     
