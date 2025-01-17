@@ -107,7 +107,8 @@ body, html {
 
 .signup-block .input-group .form-select {
     max-width: 20%; 
-    font-size: 0.75rem;
+    font-size: 1rem;
+    padding: 5px 8px;
 }
 
 .signup-block .input-group .form-control {
@@ -140,6 +141,12 @@ body, html {
         height:90%; 
         margin-bottom: 10px;
         overflow-y: auto;
+    }
+
+    .signup-block .input-group .form-select {
+        font-size: 0.9rem;      
+        padding: 5px;   
+        height:46px;        
     }
 
     .innerlog {

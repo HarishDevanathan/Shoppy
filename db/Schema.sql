@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 9.1.0, for macos13.7 (arm64)
+-- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
 -- Host: localhost    Database: project_db
 -- ------------------------------------------------------
@@ -29,14 +29,13 @@ CREATE TABLE `user_data` (
   `phno` varchar(15) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
   `doj` date DEFAULT NULL,
-  `age` int DEFAULT NULL,
-  `id` varchar(11) NOT NULL,
+  `id` varchar(11) DEFAULT NULL,
   `cart` json DEFAULT NULL,
   `orders` json DEFAULT NULL,
   `wallet` int DEFAULT NULL,
   `products` json DEFAULT NULL,
   `hist` json DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`username`),
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `phno` (`phno`)
@@ -49,7 +48,7 @@ CREATE TABLE `user_data` (
 
 LOCK TABLES `user_data` WRITE;
 /*!40000 ALTER TABLE `user_data` DISABLE KEYS */;
-INSERT INTO `user_data` VALUES ('Ganesh','scrypt:32768:8:1$S2lqZs4PBLjLdnU7$edd24fa10a37e034f18bdb53f19e05aadb4ef3e39b49dc562d6b0644fa1645a9825018dc4b91c2386dfde9bae8fb3864117a3bba33050247858b9556a918a0ac','abc@gmail.com','+91-1234567890','no 17','2025-01-14',19,'01-12345678',NULL,NULL,1000,NULL,NULL);
+INSERT INTO `user_data` VALUES ('Ganesh','scrypt:32768:8:1$S2lqZs4PBLjLdnU7$edd24fa10a37e034f18bdb53f19e05aadb4ef3e39b49dc562d6b0644fa1645a9825018dc4b91c2386dfde9bae8fb3864117a3bba33050247858b9556a918a0ac','abc@gmail.com','+91-1234567890','no 17','2025-01-14','01-12345678',NULL,NULL,1000,NULL,NULL);
 /*!40000 ALTER TABLE `user_data` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-16 17:23:19
+-- Dump completed on 2025-01-16 19:41:11

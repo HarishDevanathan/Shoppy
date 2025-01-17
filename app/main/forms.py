@@ -12,12 +12,7 @@ class SignupForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(), Length(1, 100), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0, 'Usernames must have only letters, numbers, dots, or underscores')])
     
     password = PasswordField('password', validators=[
-        DataRequired(),
-        Length(8, 16, message='Password must be between 8 to 16 characters long'),
-        Regexp(r'[A-Z]', message='Password must contain at least one uppercase letter'),
-        Regexp(r'[a-z]', message='Password must contain at least one lowercase letter'),
-        Regexp(r'[0-9]', message='Password must contain at least one digit'),
-        Regexp(r'[@$!%*?&]', message='Password must contain at least one special character (@, $, !, %, *, ?, &)'),
+        DataRequired()
     ])
     
     email = StringField('email', validators=[
@@ -180,10 +175,6 @@ class SignupForm(FlaskForm):
         Length(5, 100)
     ])
     
-    age = IntegerField('Age', validators=[
-        DataRequired(),
-        NumberRange(min=10, max=100, message="You must be between 10 and 100 years old.")
-    ])
 
     
 
