@@ -6,6 +6,7 @@
 
 {% block head %}
 {{super()}}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../static/styles/homepage.css">
 {% endblock %}
 
@@ -59,7 +60,23 @@
                 <div class="prodname">
                     <p>| {{product.name}} | {{product.brand}} | {{product.smdesc}} |</p>
                 </div>
-                <div class="rating mb-2" id="rating">Rating:⭐⭐⭐⭐⭐ by 1000 customers</div>
+                <div class="rating mb-2" id="rating">
+                    {% if product.rating is not none and product.rating_count > 0 %}
+                        Rating:
+                        {% for i in range(1, 6) %}
+                            {% if i <= product.rating|round %}
+                                <i class="fas fa-star" style="color: gold;"></i>
+                            {% elif i - 0.5 <= product.rating|round %}
+                                <i class="fas fa-star-half-alt" style="color: gold;"></i> 
+                            {% else %}
+                                <i class="far fa-star" style="color: gold;"></i> 
+                            {% endif %}
+                        {% endfor %}
+                        by {{ product.rating_count }} customer{% if product.rating_count > 1 %}s{% endif %}
+                    {% else %}
+                        No ratings yet
+                    {% endif %}
+                </div>                          
                 <div class="price">
                     <div class="original custom-font">₹5000</div>
                     <div class="discount custom-font">₹3500</div>
