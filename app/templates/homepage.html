@@ -50,28 +50,34 @@
         </div>
     </div>
     <div class="container main-container">
-        {% for product in productsarr %}
-        <div class="prodgrid">
-            <div class="pimg mb-2">
-                <img src="../static/productimages/VNZJ33302041.jpg" alt="Product Image" class="rounded">
+        {% if productsarr %}
+            {% for product in productsarr %}
+            <div class="prodgrid">
+                <div class="pimg mb-2">
+                    <img src="../static/productimages/{{product.imagepath}}" alt="Product Image" class="rounded">
+                </div>
+                <div class="prodname">
+                    <p>| {{product.name}} | {{product.brand}} | {{product.smdesc}} |</p>
+                </div>
+                <div class="rating mb-2" id="rating">Rating:⭐⭐⭐⭐⭐ by 1000 customers</div>
+                <div class="price">
+                    <div class="original custom-font">₹5000</div>
+                    <div class="discount custom-font">₹3500</div>
+                    <div class="off custom-font">30% off</div>
+                </div>
+                <div class="delivery custom-font">
+                    Delivery before 20 Jan
+                </div>
+                <div class="addtocart">
+                    <button>Add to Cart</button>
+                </div>
             </div>
-            <div class="prodname">
-                <p>| {{product.name}} | {{product.brand}} | {{product.smdesc}} |</p>
+            {% endfor %}
+        {% else %}
+            <div class="display" >
+                Keep exploring
             </div>
-            <div class="rating mb-2" id="rating">Rating:⭐⭐⭐⭐⭐ by 1000 customers</div>
-            <div class="price">
-                <div class="original custom-font">₹5000</div>
-                <div class="discount custom-font">₹3500</div>
-                <div class="off custom-font">30% off</div>
-            </div>
-            <div class="delivery custom-font">
-                Delivery before 20 Jan
-            </div>
-            <div class="addtocart">
-                <button>Add to Cart</button>
-            </div>
-        </div>
-        {% endfor %}
+        {% endif %}
         </div>
     </div>
 </div>

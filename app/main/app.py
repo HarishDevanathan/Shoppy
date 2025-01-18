@@ -117,8 +117,8 @@ def home():
         flash("Please log in first.", "warning")
         return redirect(url_for('login'))
     
-    check_product=products.query.filter_by(name="water bottle")
-
+    check_product=products.query.filter_by(name="water bottlex")
+    print(check_product)
     username = session['username']
     return render_template("homepage.html",productsarr=check_product)
 
