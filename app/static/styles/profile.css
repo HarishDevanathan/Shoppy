@@ -33,6 +33,7 @@ label {
   margin-bottom: 10px;
   width: 100%;
 }
+
 .button {
   position: relative;
   margin-bottom: 10px;
@@ -66,9 +67,10 @@ label {
 }
 
 #username,#password,#email{
-  border: 2px blue solid;
+  border-color: black;
   border-radius: 5px;
-  box-shadow: 0px 0px 20px 2px blue;
+  background-color: black;
+  color:white;
 }
 
 #username:focus,#password:focus,#email:focus{
