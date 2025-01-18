@@ -16,7 +16,7 @@ class user_data(db.Model):
     cart=db.Column(db.JSON)
     orders=db.Column(db.JSON)
     wallet=db.Column(db.Integer)
-    products=db.Column(db.JSON)
+    owned_products=db.Column(db.JSON)
     hist=db.Column(db.JSON)
 
     def __repr__(self):
@@ -32,6 +32,30 @@ class user_data(db.Model):
             if(not check_user):
                 return cust
             random_number=random.randint(10000000,99999999)
+
+class products(db.Model):
+    __tablename__="products"
+    name=db.Column(db.String(100))
+    brand=db.Column(db.String(100))
+    product_id=db.Column(db.String(16),primary_key=True)
+    id=db.Column(db.String(11),db.ForeignKey('user_data.id'),nullable=False)
+    discountpercentage=db.Column(db.Integer)
+    discountprice=db.Column(db.Integer)
+    imagepath=db.Column(db.String(200))
+    productdesc=db.Column(db.String(500))
+    rating=db.Column(db.Float)
+    stock=db.Column(db.Integer)
+    units_sold=db.Column(db.Integer)
+    rating_count=db.Column(db.Integer)
+    smdesc=db.Column(db.String(100))
+    mrp=db.Column(db.Integer)
+
+    user=db.relationship('user_data',backref='products')
+
+    def __repr__(self):
+        return f'{self.product_id}'
+
+
 
     
 

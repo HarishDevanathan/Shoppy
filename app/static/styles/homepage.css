@@ -95,3 +95,162 @@
 .dot.active {
     background-color: #717171;
 }
+
+.main-container {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    column-gap: 5px;
+    row-gap: 20px;
+    padding: 15px;
+    background-color:white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+        padding: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-container {
+        grid-template-columns: 1fr; 
+    }
+}
+
+
+.prodgrid{
+    text-align: center;
+    max-width: 300px;
+    border:1px solid red;
+    border-radius: 2%;
+    padding:5px;
+    box-shadow: 0 0 15px 5px grey;
+    background-color: black;
+}
+
+.pimg {
+    overflow: hidden;
+    height: 200px;
+    background-color: black;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.pimg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.prodname {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.price .original {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.price .discount {
+    font-size: 1.2rem;
+    color: #28a745;
+    font-weight: 600;
+}
+
+.delivery {
+    margin-bottom: 10px;
+    color: #17a2b8;
+    font-size: 0.9rem;
+}
+
+.addtocart button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffc107;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.addtocart button:hover {
+    background-color: #e0a800;
+}
+
+.custom-font {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        max-width: 100%;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .prodname {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .price .discount {
+        font-size: 1.1rem;
+    }
+
+    .delivery {
+        font-size: 0.8rem;
+    }
+
+    .addtocart button {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-container {
+        padding: 10px;
+    }
+
+    .prodname {
+        font-size: 0.9rem;
+    }
+
+    .price .discount {
+        font-size: 1rem;
+    }
+
+    .delivery {
+        font-size: 0.75rem;
+    }
+
+    .addtocart button {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+}
+
+@media(max-width:780px){
+    .main-container{
+        grid-template-columns: 1fr 1fr;
+
+    }
+}
+#rating{
+    color:white;
+}

@@ -6,8 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from mails import send_email,init_mail
 from flask import Flask, render_template, redirect, url_for
 from datetime import date
-
-from models import user_data, db
+from models import user_data,products, db
 from mails import send_email, init_mail
 from datetime import timedelta
 import webbrowser
@@ -100,7 +99,7 @@ def signup():
             cart=[],
             orders=[],
             wallet=0,
-            products=[],
+            owned_products=[],
             hist=[]
         )
         db.session.add(new_user)
@@ -117,9 +116,11 @@ def home():
     if 'user_id' not in session:
         flash("Please log in first.", "warning")
         return redirect(url_for('login'))
+    
+    check_product=products.query.filter_by(name="water bottle")
 
     username = session['username']
-    return render_template("homepage.html", username=username)
+    return render_template("homepage.html",productsarr=check_product)
 
 def generate_id():
     with app.app_context():
@@ -147,5 +148,5 @@ def profile():
         return redirect(url_for('login'))
     
 if __name__ == "__main__":
-    webbrowser.open("http://127.0.0.1:5001/login")
+    #webbrowser.open("http://127.0.0.1:5001/login")
     app.run(debug=True, port=5001)
