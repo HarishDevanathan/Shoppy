@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/profile.css') }}">
+{% endblock %}
+
+{% block body %}
+    {{ super() }}
+    <div style="margin-bottom:0px">
+      &nbsp;
+    </div>
+    <div class="container-fluid maincont">
+      <h2>Hello, {{ user.username }}!!</h2>
+      <hr>
+      <div class="input-group">
+        <form method="POST">
+          <div class="row align-items-center"> <!-- Aligns the content vertically in the center -->
+            <div class="col-md-8">
+              <label for="username" id="userlabel">Username</label>
+              {{ form.username(class="form-control", disabled=True) }}
+            </div>
+            <div class="col-md-4 d-flex justify-content-center justify-content-md-start"> <!-- Makes the button align properly -->
+              <button class="btn btn-primary mt-1 ms-3 mb-3 button">
+                <i class="fas fa-pencil-alt"></i> Edit
+              </button>
+            </div>  
+          </div>
+        </form>
+      </div>
+    </div>
+{% endblock %}

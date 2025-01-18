@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, session, flash, request
-from forms import LoginForm, SignupForm
+from forms import LoginForm, SignupForm,ProfileForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import user_data,db
 from flask_sqlalchemy import SQLAlchemy
@@ -131,6 +131,21 @@ def send_email_route():
     send_email('This is a test mail', ['ganeshkumar78602005@gmail.com', 'harishdevanathan123@gmail.com'])
     return 'Email Sent'
 
+@app.route('/profile')
+def profile():
+    if 'username' in session:
+        username = session['username']
+        user = user_data.query.get(username)
+        
+        if user:
+            form=ProfileForm()
+            form.username.data = session['username']
+            return render_template('profile.html', user=user,form=form)
+        else:
+            return 'User not found'
+    else:
+        return redirect(url_for('login'))
+    
 if __name__ == "__main__":
     webbrowser.open("http://127.0.0.1:5001/login")
     app.run(debug=True, port=5001)

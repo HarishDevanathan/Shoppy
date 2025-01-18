@@ -174,6 +174,9 @@ class SignupForm(FlaskForm):
         DataRequired(),
         Length(5, 100)
     ])
+
+class ProfileForm(FlaskForm):
+    username = StringField('username', validators=[DataRequired()])
     
 
     
