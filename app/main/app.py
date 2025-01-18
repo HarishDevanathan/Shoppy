@@ -7,7 +7,7 @@ from mails import send_email,init_mail
 from flask import Flask, render_template, redirect, url_for
 from datetime import date
 
-from models import user_data, db
+from models import user_data,products, db
 from mails import send_email, init_mail
 from datetime import timedelta
 import webbrowser
@@ -28,6 +28,14 @@ app.permanent_session_lifetime=timedelta(hours=2)
 
 db.init_app(app)
 init_mail(app)
+
+@app.route('/product')
+def productshow():
+    check_prod=products.query.filter_by(name="water bottle").first()
+    if check_prod:
+        return f"{check_prod.name} {check_prod.id} {check_prod.product_id}"
+    else:
+        return "product not found"
 
 @app.route('/')
 def base():
@@ -100,7 +108,7 @@ def signup():
             cart=[],
             orders=[],
             wallet=0,
-            products=[],
+            owned_products=[],
             hist=[]
         )
         db.session.add(new_user)

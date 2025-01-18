@@ -16,7 +16,7 @@ class user_data(db.Model):
     cart=db.Column(db.JSON)
     orders=db.Column(db.JSON)
     wallet=db.Column(db.Integer)
-    products=db.Column(db.JSON)
+    owned_products=db.Column(db.JSON)
     hist=db.Column(db.JSON)
 
     def __repr__(self):
@@ -40,7 +40,7 @@ class products(db.Model):
     product_id=db.Column(db.String(16),primary_key=True)
     id=db.Column(db.String(11),db.ForeignKey('user_data.id'),nullable=False)
     discountpercentage=db.Column(db.Integer)
-    discuntprice=db.Column(db.Integer)
+    discountprice=db.Column(db.Integer)
     imagepath=db.Column(db.String(200))
     productdesc=db.Column(db.String(500))
     rating=db.Column(db.Float)
@@ -48,6 +48,7 @@ class products(db.Model):
     units_sold=db.Column(db.Integer)
     rating_count=db.Column(db.Integer)
     smdesc=db.Column(db.String(100))
+    mrp=db.Column(db.Integer)
 
     user=db.relationship('user_data',backref='products')
 
