@@ -147,9 +147,10 @@ def profile():
             form.email.data = user.email
 
             if request.method == 'POST':
-                print(form.email) 
-                if form.email.data:
-                        user.email = form.email.data  
+                form1=ProfileForm()
+                print(form1.email.data) 
+                if form1.email.data:
+                        user.email = form1.email.data  
                         db.session.commit()  
                         flash('Email updated successfully!', 'success')
 
