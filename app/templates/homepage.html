@@ -49,8 +49,30 @@
             <span class="dot" data-index="3"></span>
         </div>
     </div>
-    <div>
-       Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae blanditiis ratione explicabo ad, assumenda facere omnis laborum itaque. Optio illum cum quod explicabo saepe incidunt voluptas pariatur nostrum fugiat a quae impedit, porro quibusdam blanditiis mollitia iste quisquam laboriosam? Commodi tempora vero maxime dignissimos quo porro ducimus soluta nam non iusto dolor, culpa, quam natus optio harum reiciendis explicabo, aspernatur eaque. Optio, laborum, qui aliquid facere officiis repellat laudantium nihil doloremque suscipit ab quibusdam nulla ad nesciunt dignissimos perferendis, delectus voluptas id quam voluptate eum repudiandae deserunt molestias fugit. Molestias facere soluta voluptatem, necessitatibus in placeat eum repellendus deserunt excepturi, iusto dolorem? Obcaecati architecto corrupti voluptatum provident odio nesciunt iure expedita eum quod commodi doloremque est voluptatibus illo omnis corporis, eos quis cupiditate reiciendis? Dolore excepturi asperiores perferendis sunt blanditiis eos non quas quaerat in, accusantium delectus illo consectetur obcaecati quod magnam porro. Cum hic nostrum vero, ipsam nemo fugit nam totam possimus ea. Expedita commodi atque dicta! Eveniet molestiae repellendus, molestias sit praesentium odit earum soluta nostrum reiciendis, accusamus quisquam, perspiciatis eos dolorem quae vero. Odit expedita odio fuga hic nemo sapiente praesentium ad soluta iusto facere voluptatibus dolore consequatur minima dignissimos sint aperiam, nulla consectetur, voluptatum placeat in facilis blanditiis veniam beatae. Sequi dolore atque soluta quis, rem minima exercitationem, inventore neque amet qui nesciunt a. Labore, delectus? Unde fuga deleniti saepe esse, sapiente id rem sit voluptates quibusdam modi quaerat! Expedita dolore commodi facilis sapiente, quis voluptatem id consectetur fuga voluptate quisquam recusandae, velit et nam eligendi ducimus, nemo nesciunt ab error laborum temporibus fugiat at quod. Rerum tempora ipsam, vitae nulla illum, esse cumque voluptatibus dolor, quasi eum doloremque incidunt cupiditate molestiae? Quidem illo placeat inventore blanditiis error atque provident nisi, amet veritatis! Laborum, esse natus voluptatem aut tempore nulla cupiditate. Voluptas, aperiam fugit facilis omnis, hic consectetur nulla, animi laborum assumenda eligendi tenetur beatae ea? Aperiam facere veritatis placeat porro fugit modi atque reiciendis error libero, aut rerum, ipsam nobis consectetur rem vitae corrupti itaque illum. Quasi totam pariatur fugit error reiciendis. Ut eveniet quam dignissimos, totam consectetur iure consequuntur facere placeat temporibus cumque voluptatum suscipit labore veritatis iste tenetur culpa voluptates ipsa in esse itaque. Quibusdam quo voluptatem, nisi atque sapiente officia. Perspiciatis, adipisci error provident ut, nobis suscipit deserunt qui at, ad autem nemo ab rem facere quos voluptates incidunt assumenda. Laboriosam voluptatem sequi provident! Aut aspernatur quaerat fuga voluptas nemo sapiente nostrum eveniet recusandae corporis magni, molestiae temporibus? Asperiores enim, aliquid repellat iusto rerum tenetur et sunt quo. Libero iure eveniet odio praesentium rem sunt, atque tenetur tempore molestias excepturi eius eum? Laborum harum in asperiores amet, ab dolorum delectus. Ex veniam porro debitis ea magni obcaecati fugiat, illo odit consectetur nobis ipsum mollitia consequuntur harum inventore repellendus voluptate tempora aliquam molestiae sint vitae. Deleniti, qui, perspiciatis laboriosam reiciendis nesciunt dicta esse nam fugiat, quam quo fuga. Nisi ipsum dignissimos, totam et error accusantium exercitationem repudiandae fugiat? Vel explicabo beatae, velit veritatis quaerat ipsam unde. Obcaecati sed rerum deleniti ut delectus esse.
+    <div class="container main-container">
+        {% for product in productsarr %}
+        <div class="prodgrid">
+            <div class="pimg mb-2">
+                <img src="../static/productimages/VNZJ33302041.jpg" alt="Product Image" class="rounded">
+            </div>
+            <div class="prodname">
+                <p>| {{product.name}} | {{product.brand}} | {{product.smdesc}} |</p>
+            </div>
+            <div class="rating mb-2" id="rating">Rating:⭐⭐⭐⭐⭐ by 1000 customers</div>
+            <div class="price">
+                <div class="original custom-font">₹5000</div>
+                <div class="discount custom-font">₹3500</div>
+                <div class="off custom-font">30% off</div>
+            </div>
+            <div class="delivery custom-font">
+                Delivery before 20 Jan
+            </div>
+            <div class="addtocart">
+                <button>Add to Cart</button>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
     </div>
 </div>
 

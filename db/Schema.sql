@@ -37,6 +37,7 @@ CREATE TABLE `products` (
   `rating_count` int DEFAULT NULL,
   `smdesc` varchar(100) DEFAULT NULL,
   `shipping` int DEFAULT NULL,
+  `mrp` int DEFAULT NULL,
   PRIMARY KEY (`product_id`),
   KEY `id` (`id`),
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id`) REFERENCES `user_data` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -49,6 +50,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES ('water bottle','signoraware','VNZJ33302041','02-12345678',30,3500,'VNZJ33302041.jpg','this is set of 9 water bottles',5,20,50,1000,'set of 9 bottles',3,5000);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +72,7 @@ CREATE TABLE `user_data` (
   `cart` json DEFAULT NULL,
   `orders` json DEFAULT NULL,
   `wallet` int DEFAULT NULL,
-  `products` json DEFAULT NULL,
+  `owned_products` json DEFAULT NULL,
   `hist` json DEFAULT NULL,
   PRIMARY KEY (`username`),
   UNIQUE KEY `id` (`id`),
@@ -85,7 +87,7 @@ CREATE TABLE `user_data` (
 
 LOCK TABLES `user_data` WRITE;
 /*!40000 ALTER TABLE `user_data` DISABLE KEYS */;
-INSERT INTO `user_data` VALUES ('Ganesh','scrypt:32768:8:1$S2lqZs4PBLjLdnU7$edd24fa10a37e034f18bdb53f19e05aadb4ef3e39b49dc562d6b0644fa1645a9825018dc4b91c2386dfde9bae8fb3864117a3bba33050247858b9556a918a0ac','abc@gmail.com','+91-1234567890','no 17','2025-01-14','02-12345678',NULL,NULL,1000,NULL,NULL);
+INSERT INTO `user_data` VALUES ('Ganesh','scrypt:32768:8:1$S2lqZs4PBLjLdnU7$edd24fa10a37e034f18bdb53f19e05aadb4ef3e39b49dc562d6b0644fa1645a9825018dc4b91c2386dfde9bae8fb3864117a3bba33050247858b9556a918a0ac','abc@gmail.com','+91-1234567890','no 17','2025-01-14','02-12345678',NULL,NULL,1000,'[\"VNZJ33302041\"]',NULL);
 /*!40000 ALTER TABLE `user_data` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -98,4 +100,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-18 13:53:57
+-- Dump completed on 2025-01-18 16:45:44

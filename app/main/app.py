@@ -116,9 +116,11 @@ def home():
     if 'user_id' not in session:
         flash("Please log in first.", "warning")
         return redirect(url_for('login'))
+    
+    check_product=products.query.filter_by(name="water bottle")
 
     username = session['username']
-    return render_template("homepage.html", username=username)
+    return render_template("homepage.html",productsarr=check_product)
 
 def generate_id():
     with app.app_context():
@@ -131,5 +133,5 @@ def send_email_route():
     return 'Email Sent'
 
 if __name__ == "__main__":
-    webbrowser.open("http://127.0.0.1:5001/login")
+    #webbrowser.open("http://127.0.0.1:5001/login")
     app.run(debug=True, port=5001)
