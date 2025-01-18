@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,IntegerField,SelectField
+from wtforms import StringField,PasswordField,IntegerField,SelectField,SubmitField
 from wtforms.validators import DataRequired,Length,Regexp,Email,NumberRange
 from models import db, user_data
 
@@ -177,6 +177,13 @@ class SignupForm(FlaskForm):
 
 class ProfileForm(FlaskForm):
     username = StringField('username', validators=[DataRequired()])
+    passw = PasswordField('passw',validators=[DataRequired()])
+    email = StringField('email', validators=[
+        DataRequired(),
+        Email(message='Invalid email address')
+    ])
+    submit = SubmitField('Save')
+    
     
 
     

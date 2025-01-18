@@ -1,34 +1,78 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    {{ super() }}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/profile.css') }}">
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/profile.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
 {% endblock %}
 
 {% block body %}
-    {{ super() }}
-    <div style="margin-bottom:0px">
-      &nbsp;
-    </div>
-    <div class="container-fluid maincont">
-      <h2>Hello, {{ user.username }}!!</h2>
-      <hr>
-      <div class="input-group">
-        <form method="POST">
-          <div class="row align-items-center"> <!-- Aligns the content vertically in the center -->
-            <div class="col-md-8">
-              <label for="username" id="userlabel">Username</label>
-              {{ form.username(class="form-control", disabled=True) }}
-            </div>
-            <div class="col-md-4 d-flex justify-content-center justify-content-md-start"> <!-- Makes the button align properly -->
-              <button class="btn btn-primary mt-1 ms-3 mb-3 button">
-                <i class="fas fa-pencil-alt"></i> Edit
-              </button>
-            </div>  
+  {{ super() }}
+  <div style="margin-bottom:0px">&nbsp;</div>
+  <div class="container-fluid maincont">
+    <h2>Hello, {{ user.username }}!!</h2>
+    <hr>
+    <div class="input-group">
+      <form method="POST" action="{{ url_for('profile') }}">  
+        {{ form.csrf_token }}
+        <div class="row align-items-center">
+          <div class="col-12">
+            <label for="username" id="userlabel">Username</label>
           </div>
-        </form>
-      </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-md-9 col-sm-10 input-field">
+            {{ form.username(class="form-control", id="username", disabled=True) }}
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-12">
+            <label for="password" id="passlabel">Password</label>
+          </div>
+          <div class="col-md-9 col-sm-10 input-field">
+            <input type="text" class="form-control" id="password" value="{{ form.passw.data }}" disabled />
+          </div>
+          <div class="col-md-3 col-sm-2 d-flex justify-content-end">
+            <button type="button" id="pass" class="btn btn-primary mt-1 mb-3 button">
+              <i class="fas fa-pencil-alt"></i> Edit
+            </button>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-12">
+            <label for="email" id="emaillabel">Email</label>
+          </div>
+          <div class="col-md-9 col-sm-10 input-field">
+            {{ form.email(class="form-control", id="email", disabled=True) }}
+          </div>
+          <div class="col-md-3 col-sm-2 d-flex justify-content-end">
+            <button type="button" id="emailbutton" class="btn btn-primary mt-1 mb-3 button">
+              <i class="fas fa-pencil-alt"></i> Edit
+            </button>
+            <input type="submit" id="saveemail" style="display:none;">
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
+
+  <script>
+    document.getElementById("pass").addEventListener("click", function() {
+      window.location.href = "http://127.0.0.1:5001/home";
+    });
+
+    document.getElementById("emailbutton").addEventListener("click", function() {
+      var emailField = document.getElementById("email");
+      var emailButton = document.getElementById("emailbutton");
+
+      if (emailField.disabled) {
+        emailField.disabled = false; 
+        emailField.focus(); 
+        emailButton.innerHTML = '<i class="fas fa-save"></i> Save';  
+      } else {
+        var emailField = document.getElementById("email");
+        document.getElementById("saveemail").click();  
+      }
+    });
+  </script>
 {% endblock %}

@@ -131,22 +131,39 @@ def generate_id():
 def send_email_route():
     send_email('This is a test mail', ['ganeshkumar78602005@gmail.com', 'harishdevanathan123@gmail.com'])
     return 'Email Sent'
+from flask import render_template, request, redirect, url_for, flash, session
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
     if 'username' in session:
         username = session['username']
-        user = user_data.query.get(username)
-        
+        user = user_data.query.filter_by(username=username).first()
+
         if user:
-            form=ProfileForm()
-            form.username.data = session['username']
-            return render_template('profile.html', user=user,form=form)
+            form = ProfileForm()
+
+            form.username.data = user.username
+            form.passw.data = '**********'  
+            form.email.data = user.email
+
+            if request.method == 'POST':
+                print(form.email) 
+                if form.email.data:
+                        user.email = form.email.data  
+                        db.session.commit()  
+                        flash('Email updated successfully!', 'success')
+
+                return redirect(url_for('profile'))
+
+            return render_template('profile.html', user=user, form=form)
+
         else:
             return 'User not found'
+
     else:
         return redirect(url_for('login'))
+
     
 if __name__ == "__main__":
-    #webbrowser.open("http://127.0.0.1:5001/login")
+    webbrowser.open("http://127.0.0.1:5001/login")
     app.run(debug=True, port=5001)
