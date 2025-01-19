@@ -131,7 +131,6 @@ def generate_id():
 def send_email_route():
     send_email('This is a test mail', ['ganeshkumar78602005@gmail.com', 'harishdevanathan123@gmail.com'])
     return 'Email Sent'
-from flask import render_template, request, redirect, url_for, flash, session
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
@@ -191,7 +190,6 @@ def profile():
 
     else:
         return redirect(url_for('login'))
-<<<<<<< HEAD
 
 @app.route('/logout')
 def logout():
@@ -199,7 +197,7 @@ def logout():
     
     flash('You have been logged out successfully!', 'success')
     return redirect(url_for('login'))
-=======
+
     
 def genotp():
     return random.randint(100000,999999)
@@ -215,7 +213,6 @@ def forgotpassword():
         else:
             return 'Email is required', 400  
     return render_template('forgotpassword.html')
->>>>>>> 4b5b1e2e37afdeb4a03b7ce11cc7e6773987bc58
     
 if __name__ == "__main__":
     webbrowser.open("http://127.0.0.1:5001/login")
