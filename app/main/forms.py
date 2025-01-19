@@ -177,10 +177,22 @@ class SignupForm(FlaskForm):
 
 class ProfileForm(FlaskForm):
     username = StringField('username', validators=[DataRequired()])
-    passw = PasswordField('passw',validators=[DataRequired()])
+    passw = StringField('passw',validators=[DataRequired()])
     email = StringField('email', validators=[
         DataRequired(),
         Email(message='Invalid email address')
+    ])
+    phno = StringField('phno', validators=[
+        DataRequired(),
+        Length(10)
+    ])
+    countrycode = StringField('countrycode', validators=[
+        DataRequired(),
+        Length(3)
+    ])
+    address = StringField('address', validators=[
+        DataRequired(),
+        Length(5, 100)
     ])
     submit = SubmitField('Save')
     

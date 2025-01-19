@@ -145,16 +145,44 @@ def profile():
             form.username.data = user.username
             form.passw.data = '**********'  
             form.email.data = user.email
+            phno= user.phno
+            form.phno.data=phno[3:]
+            form.address.data=user.address
+            countrycode=phno[:3]
 
             if request.method == 'POST':
-                form1=ProfileForm()
-                print(form1.email.data) 
-                if form1.email.data:
-                        user.email = form1.email.data  
-                        db.session.commit()  
-                        flash('Email updated successfully!', 'success')
+                form1 = ProfileForm()
+                new_email = form1.email.data.strip().lower() if form1.email.data else form.email.data
+                new_phno= form1.phno.data if form1.phno.data else form.phno.data
+                new_address= form1.address.data if form1.address.data else form.address.data
+                existing_user = user_data.query.filter_by(email=new_email).first()
+                existing_phno = user_data.query.filter_by(phno=new_phno).first()
+
+                if existing_user and existing_user.username != user.username:
+                    flash('This email is already taken by another user.', 'danger')
+               
+                elif '.' not in new_email or '@' not in new_email:
+                    flash('Invalid email format.', 'danger')
+                
+                if existing_phno and existing_phno.username != user.username:
+                    flash('This email is already taken by another user.', 'danger')
+               
+                if new_phno and (len(new_phno) != 10 or not new_phno.isdigit()):
+                    flash('Phone number must consist of exactly 10 digits and only numbers.', 'danger')
+                    return render_template('profile.html', user=user, form=form)
+                elif len(new_address)<5:
+                     flash('Invalid address format.', 'danger')
+                else:
+                    user.email = new_email
+                    user.phno = countrycode+new_phno
+                    user.address=new_address
+                    db.session.commit()
+                    flash('Email updated successfully!', 'success')
 
                 return redirect(url_for('profile'))
+                
+            else:
+                flash('Invalid email format.', 'danger')
 
             return render_template('profile.html', user=user, form=form)
 
@@ -164,6 +192,12 @@ def profile():
     else:
         return redirect(url_for('login'))
 
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    
+    flash('You have been logged out successfully!', 'success')
+    return redirect(url_for('login'))
     
 if __name__ == "__main__":
     webbrowser.open("http://127.0.0.1:5001/login")

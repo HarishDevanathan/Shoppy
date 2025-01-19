@@ -2,11 +2,26 @@ body {
   background-color: black;
 }
 
-h2 {
+h2{
   color: white;
   text-align: center;
 }
+p{
+  text-align: center;
+  color:rgb(149, 145, 145);
+}
 
+.logoutbutton{
+  border:red;
+  box-shadow: 0px 0px 15px 5px red;
+  background-color: red;
+  border-radius: 30px;
+  margin-left: 10px;
+}
+
+.logoutbutton:hover{
+  box-shadow: 0px 0px 15px 5px blue ;
+}
 .maincont {
   width: 50%;
   height: auto;
@@ -26,12 +41,14 @@ label {
   color: white;
   font-size: 18px;
   margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 .form-control {
   background-color: grey;
   margin-bottom: 10px;
   width: 100%;
+  margin-left: 10px;
 }
 
 .button {
@@ -66,14 +83,19 @@ label {
   left: 0;
 }
 
-#username,#password,#email{
+.button:active::before{
+  background-color: rgb(27, 211, 236);
+}
+
+#username,#password,#email,#phno,#address{
   border-color: black;
   border-radius: 5px;
   background-color: black;
   color:white;
+  font-size: 18px;
 }
 
-#username:focus,#password:focus,#email:focus{
+#username:focus,#password:focus,#email:focus,#phno:focus,#address:focus{
   border: 2px red solid;
   border-radius: 5px;
   box-shadow: 0px 0px 20px 2px red;
