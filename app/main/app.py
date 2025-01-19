@@ -11,7 +11,7 @@ from mails import send_email, init_mail
 from datetime import timedelta
 import webbrowser
 from sqlalchemy import func
-
+import random
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
 app.config['SECRET_KEY'] = "This_is_a_secret_key_@123!@#"
@@ -191,6 +191,7 @@ def profile():
 
     else:
         return redirect(url_for('login'))
+<<<<<<< HEAD
 
 @app.route('/logout')
 def logout():
@@ -198,6 +199,23 @@ def logout():
     
     flash('You have been logged out successfully!', 'success')
     return redirect(url_for('login'))
+=======
+    
+def genotp():
+    return random.randint(100000,999999)
+    
+@app.route('/forgotpassword', methods=['GET', 'POST'])
+def forgotpassword():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        if email:
+            liste = [email]
+            send_email(str(genotp()), liste)
+            return 'Mail sent successfully'
+        else:
+            return 'Email is required', 400  
+    return render_template('forgotpassword.html')
+>>>>>>> 4b5b1e2e37afdeb4a03b7ce11cc7e6773987bc58
     
 if __name__ == "__main__":
     webbrowser.open("http://127.0.0.1:5001/login")

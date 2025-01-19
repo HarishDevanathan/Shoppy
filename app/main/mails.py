@@ -7,6 +7,9 @@ def init_mail(app):
     mail.init_app(app)
 
 def send_email(subject, recipients, body=""):
-    msg = Message(subject, recipients=recipients)
-    msg.body = body
+    full_body = f"Subject: {subject}\n\n{body}"
+    msg = Message("", recipients=recipients) 
+    msg.body = full_body  
+    print(f"Message Body: {msg.body}")
+
     mail.send(msg)
