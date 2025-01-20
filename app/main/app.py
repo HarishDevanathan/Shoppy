@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, session, flash, request
-from forms import LoginForm, SignupForm,ProfileForm
+from forms import LoginForm, SignupForm, ProfileForm, ForgotPasswordForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import user_data,db
 from flask_sqlalchemy import SQLAlchemy
@@ -27,10 +27,6 @@ app.permanent_session_lifetime=timedelta(hours=2)
 
 db.init_app(app)
 init_mail(app)
-
-@app.route('/')
-def base():
-    return render_template("base.html")
 
 @app.route('/clear-session', methods=['POST'])
 def clear_session():
@@ -113,7 +109,7 @@ def signup():
 
 @app.route('/home')
 def home():
-    if 'user_id' not in session:
+    if 'username' not in session:
         flash("Please log in first.", "warning")
         return redirect(url_for('login'))
     
@@ -126,11 +122,6 @@ def generate_id():
     with app.app_context():
         id = user_data.generate_uid()
     return id
-
-@app.route('/send-email')
-def send_email_route():
-    send_email('This is a test mail', ['ganeshkumar78602005@gmail.com', 'harishdevanathan123@gmail.com'])
-    return 'Email Sent'
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
@@ -201,18 +192,39 @@ def logout():
     
 def genotp():
     return random.randint(100000,999999)
-    
-@app.route('/forgotpassword', methods=['GET', 'POST'])
+
+@app.route('/forgotpassword',methods=['GET','POST'])
 def forgotpassword():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        if email:
-            liste = [email]
-            send_email(str(genotp()), liste)
-            return 'Mail sent successfully'
+    form=ForgotPasswordForm()
+    error_messages={}
+    if form.validate_on_submit():
+        session['username']=form.username.data
+        session['email']=form.email.data
+        print(form.username.data)
+        print(form.email.data)
+        if checkEmail(session.get('username'),session.get('email'))==1:
+            session['otptemp']=str(genotp())
+            send_email( session.get('otptemp') ,[ session.get('email')] )
+            return 'email-sent successfully'
+        elif checkEmail(session.get('username'), session.get('email'))==0:
+            error_messages['email']='*Invalid email*'
+            error_messages['username']=''
+        elif checkEmail(session.get('username'), session.get('email'))==-1:
+            error_messages['username']='*Invalid username*'
+            error_messages['email']=''
+    return render_template('forgotpassword.html',form=form,errors=error_messages)
+
+
+def checkEmail(username,checkmail) -> int:
+    with app.app_context():
+        check_user = user_data.query.filter(func.lower(user_data.username) == username.lower()).first()
+        if check_user:
+            if check_user.email==checkmail:
+                return 1
+            else:
+                return 0
         else:
-            return 'Email is required', 400  
-    return render_template('forgotpassword.html')
+            return -1
     
 if __name__ == "__main__":
     webbrowser.open("http://127.0.0.1:5001/login")

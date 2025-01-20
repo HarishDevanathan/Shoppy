@@ -195,6 +195,11 @@ class ProfileForm(FlaskForm):
         Length(5, 100)
     ])
     submit = SubmitField('Save')
+
+class ForgotPasswordForm(FlaskForm):
+    username=StringField('username',validators=[DataRequired()])
+    email=StringField('email', validators=[DataRequired(),Email(message='Invalid mail address')])
+    
     
     
 

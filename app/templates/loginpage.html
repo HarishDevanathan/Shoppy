@@ -42,8 +42,8 @@
                         <button class="mt-4 ms-3 ps-3 pe-3 mb-3 btn btn-primary" type="submit">Confirm</button>
                         <p class="text-center">Don't have an account?</p>
                         <a href="/signup" class="text-center d-block mx-auto">Sign Up</a>
-                        <button class="text-center d-block mx-auto mt-2 p-2 btn btn-primary">Forgot password</button>
                     </form>
+                    <button class="text-center d-block mx-auto mt-2 p-2 btn btn-primary" onclick="navigate_to_url('/forgotpassword')">Forgot password</button>
                 </div>
             </div>
         </div>
@@ -70,5 +70,10 @@
     document.getElementById('password').addEventListener('blur', () => {
         password.style.color = "rosybrown"
     });
+
+    function navigate_to_url(url){
+        window.location.href=url
+    }
 </script>
+
 </html>
