@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, session, flash, request
-from forms import LoginForm, SignupForm, ProfileForm, ForgotPasswordForm
+from forms import LoginForm, SignupForm, ProfileForm, ForgotPasswordForm, OTPForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import user_data,db
 from flask_sqlalchemy import SQLAlchemy
@@ -205,7 +205,8 @@ def forgotpassword():
         if checkEmail(session.get('username'),session.get('email'))==1:
             session['otptemp']=str(genotp())
             send_email( session.get('otptemp') ,[ session.get('email')] )
-            return 'email-sent successfully'
+            session['switch']=1
+            return redirect(url_for('forgverification'))
         elif checkEmail(session.get('username'), session.get('email'))==0:
             error_messages['email']='*Invalid email*'
             error_messages['username']=''
@@ -225,6 +226,31 @@ def checkEmail(username,checkmail) -> int:
                 return 0
         else:
             return -1
+        
+@app.route('/forgotpassword/verfication',methods=['GET','POST'])
+def forgverification():
+    if 'switch' in session:
+        form=OTPForm()
+        if session.get('switch')==1:
+            if form.validate_on_submit():
+                otp=form.otp.data
+                if(session.get('otptemp')==otp):
+                    username=session.get('username')
+                    session.clear()
+                    session['username']=username
+                    return redirect(url_for('login'))
+            return render_template('enterotp.html',form=form)
+        else:
+            flash('enter username and email first','Warning')
+            return redirect(url_for('forgotpassword'))
+    else:
+        flash('enter username and email first','Warning')
+        return redirect(url_for('forgotpassword'))
+
+@app.route('/clearsession',methods=['GET'])
+def clearsession():
+    session.clear()
+    return redirect(url_for('login'))
     
 if __name__ == "__main__":
     webbrowser.open("http://127.0.0.1:5001/login")

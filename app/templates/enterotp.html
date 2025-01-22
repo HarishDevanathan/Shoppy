@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoppy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body{
+            background-color: white;
+            font-family: 'Montserrat';
+            background:linear-gradient(to bottom,red,orange);
+            margin:2%;
+        }
+        .forg-main{
+            width:80%;
+            max-width: 400px;
+            background-color:black;
+            border:2px solid blue;
+            border-radius:10px;
+            color:white;
+        }  
+        .forg-main h1{
+            color:red;
+        }
+        #forg-user label,#forg-email label{
+            width:100%;
+        }
+        #forg-image{
+            position:absolute;
+            left:0;
+            top:0;
+            width:30%;
+            height:auto;
+            margin:0;
+        }
+        .forg-form input{
+            border-radius: 5px;
+            border:2px solid red;
+            margin-left:3px;
+            width: 100%;
+            height:10vh;
+            max-height:35px;
+        }
+        .forg-form button {
+            position: relative;
+            margin:2%;
+            background-color: blue;
+            color:white;
+            border-radius: 30px;
+            width: auto;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .forg-form button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background:red;
+            z-index: -1;
+            transition: left 0.3s ease;
+        }
+
+        .forg-form button:hover {
+            background-color:white;
+            color:black;
+        /* box-shadow: 0px 0px 15px 2px red; */
+        }
+
+        .forg-form button:hover::before {
+            left: 0;
+        }
+
+        .forg-form button:active::before{
+            background-color: rgb(27, 211, 236);
+        }
+        #otp{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <img src="../static/images/think.png" id="forg-image">
+    <div class="container-fluid d-flex text-center align-items-center justify-content-center vh-100 ">
+        <div class="container forg-main">
+            <h1 >Forgot password?</h1>
+            <p class="sm p-2 mt-2">change your password by verifying the one-time-password sent to your email</p>
+            <form class="forg-form" method="POST">
+                {{ form.hidden_tag() }}
+                {{ form.otp(class='form-control',id='otp')}}
+                <br>
+                <br>
+                <button type="submit">enter</button>
+                <button>resend</button>
+                <button>Go back</button>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    window.addEventListener('beforeunload',function(){
+        fetch('/clearsession',{method:'GET'});
+    });
+</script>
+</html>

@@ -199,6 +199,9 @@ class ProfileForm(FlaskForm):
 class ForgotPasswordForm(FlaskForm):
     username=StringField('username',validators=[DataRequired()])
     email=StringField('email', validators=[DataRequired(),Email(message='Invalid mail address')])
+
+class OTPForm(FlaskForm):
+    otp=StringField('otp',validators=[DataRequired(),Length(6,6)],render_kw={"placeholder":"Enter the 6 digit OTP"})
     
     
     
