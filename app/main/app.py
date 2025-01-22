@@ -31,7 +31,7 @@ init_mail(app)
 @app.route('/clear-session', methods=['POST'])
 def clear_session():
     session.clear()
-    return '', 200
+    return redirect(url_for('login'))
 
 @app.route('/aboutus')
 def aboutus():
