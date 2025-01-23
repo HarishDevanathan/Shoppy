@@ -62,28 +62,35 @@
                 </div>
                 <div class="rating mb-2" id="rating">
                     {% if product.rating is not none and product.rating_count > 0 %}
-                        Rating:
-                        {% for i in range(1, 6) %}
-                            {% if i <= product.rating|round %}
-                                <i class="fas fa-star" style="color: gold;"></i>
-                            {% elif i - 0.5 <= product.rating|round %}
-                                <i class="fas fa-star-half-alt" style="color: gold;"></i> 
-                            {% else %}
-                                <i class="far fa-star" style="color: gold;"></i> 
-                            {% endif %}
-                        {% endfor %}
-                        by {{ product.rating_count }} customer{% if product.rating_count > 1 %}s{% endif %}
-                    {% else %}
-                        No ratings yet
-                    {% endif %}
+                    Rating:
+                    {% for i in range(1, 6) %}
+                        {% if i <= product.rating %}
+                            <i class="fas fa-star" style="color: gold;"></i>
+                        {% elif i - 1 < product.rating < i %}
+                            <i class="fas fa-star-half-alt" style="color: gold;"></i>
+                        {% else %}
+                            <i class="far fa-star" style="color:grey;"></i>
+                        {% endif %}
+                    {% endfor %}
+                    by {{ product.rating_count }} customer{% if product.rating_count > 1 %}s{% endif %}
+                {% else %}
+                    No ratings yet
+                {% endif %}                
                 </div>                          
-                <div class="price">
-                    <div class="original custom-font">₹5000</div>
-                    <div class="discount custom-font">₹3500</div>
-                    <div class="off custom-font">30% off</div>
-                </div>
+                
+                    {% if product.discountpercentage > 0  and product.discountprice > 0 %}
+                    <div class="price">
+                        <div class="original custom-font">₹{{product.mrp}}</div>
+                        <div class="discount custom-font">₹{{product.discountprice}}</div>
+                        <div class="off custom-font">{{product.discountpercentage}}% off</div>
+                    </div>
+                    {% else %}
+                        <center>
+                            <div class="price bg-danger text-center">₹{{product.mrp}}</div>
+                        </center>
+                    {% endif %}
                 <div class="delivery custom-font">
-                    Delivery before 20 Jan
+                    Delivery before {{product.shipping}}
                 </div>
                 <div class="addtocart">
                     <button>Add to Cart</button>
