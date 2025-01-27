@@ -1,3 +1,11 @@
+body{
+    opacity:0;
+    transition:0.5s
+}
+body.loaded{
+    opacity:1;
+    transition:0.5s
+}
 .homenav {
     border-radius: 10px;
     background-color: red;
@@ -253,4 +261,12 @@
 }
 #rating{
     color:white;
+}
+#explore{
+    font-weight: bold;
+    color: blue;
+    border-radius:5px;
+    margin-left:10px;
+    margin-right:10px;
+    border:1px solid black;
 }

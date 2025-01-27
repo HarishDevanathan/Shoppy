@@ -12,6 +12,7 @@ from datetime import timedelta
 import webbrowser
 from sqlalchemy import func
 import random
+import json
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
 app.config['SECRET_KEY'] = "This_is_a_secret_key_@123!@#"
@@ -106,18 +107,49 @@ def signup():
         print(form.errors) 
     return render_template("signup.html", form=form)
 
-
 @app.route('/home')
 def home():
     if 'username' not in session:
         flash("Please log in first.", "warning")
         return redirect(url_for('login'))
     
+    check_user=user_data.query.filter(func.lower(user_data.username)==session.get('username').lower()).first()
+    print(check_user.username)
+    if check_user:
+        print("not null")
+        if check_user.hist:
+            userhistory=check_user.hist
+            print(userhistory)
+            print(type(userhistory[0]))
+            productsarr=set()
+            for i in userhistory:
+                print(i)
+                temp = products.query.filter(func.lower(products.name).contains(i.lower())).all()
+                for j in temp:
+                    productsarr.add(j)
+                temp = products.query.filter(func.lower(products.brand).contains(i.lower())).all()
+                for j in temp:
+                    productsarr.add(j)
+            print(productsarr)
+            return render_template("homepage.html",productsarr=productsarr)
+    else:
+        productsarr=[]
+        print(productsarr)
+        return render_template("homepage.html",productsarr=productsarr)
+'''
+@app.route('/home')
+def home():
+    if 'username' not in session:
+        flash("Please log in first.", "warning")
+        return redirect(url_for('login'))
+    
+    
     check_product=products.query.filter_by(name="water bottle")
     print(check_product)
     username = session['username']
     return render_template("homepage.html",productsarr=check_product)
-
+'''
+    
 def generate_id():
     with app.app_context():
         id = user_data.generate_uid()
