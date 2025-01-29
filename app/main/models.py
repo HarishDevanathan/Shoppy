@@ -18,7 +18,8 @@ class user_data(db.Model):
     wallet=db.Column(db.Integer)
     owned_products=db.Column(db.JSON)
     hist=db.Column(db.JSON)
-
+    wishlist=db.Column(db.JSON)
+    gender=db.Column(db.String(1))
     def __repr__(self):
         return f'{self.username}'
     

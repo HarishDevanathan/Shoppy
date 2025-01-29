@@ -155,7 +155,7 @@ def generate_id():
         id = user_data.generate_uid()
     return id
 
-@app.route('/profile', methods=['GET', 'POST'])
+@app.route('/profileedit', methods=['GET', 'POST'])
 def profile():
     if 'username' in session:
         username = session['username']
@@ -283,6 +283,36 @@ def forgverification():
 def clearsession():
     session.clear()
     return redirect(url_for('login'))
+
+@app.route('/product')
+def product():
+    return render_template('productvisit.html')
+
+@app.route('/profback')
+def profilemod():
+    if 'username' not in session:
+        flash('login first','warning')
+        return redirect(url_for('login'))
+    brand_dict={} 
+    user=user_data.query.filter(func.lower(user_data.username)==session.get('username').lower()).first()
+    for i in user.owned_products:
+        tempprod=products.query.filter(products.product_id==i).first()
+        if tempprod:
+            if tempprod.brand in brand_dict:
+                brand_dict[tempprod.brand]+=1
+            else:
+                brand_dict[tempprod.brand]=1
+    tempkey=""
+    tempvalue=-1
+    for key,value in brand_dict.items():
+        if(value>tempvalue):
+            tempkey=key
+            tempvalue=value
+    print(user.gender)
+    if tempkey!="":
+        tempkey='-'
+    
+    return render_template('profilemod.html',user=user,msb=tempkey)
     
 if __name__ == "__main__":
     webbrowser.open("http://127.0.0.1:5001/login")

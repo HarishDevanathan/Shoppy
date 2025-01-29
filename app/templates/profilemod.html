@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ super() }}
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background-image: url('../static/images/profilebg.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    .profile-box{
+        max-width: 600px;
+        min-height:60vh;
+        width:80vw;
+        border:1px solid black;
+        border-radius:10px;
+        box-shadow: 0 4px 8px grey, 0 -4px 8px grey, 4px 0 8px grey, -4px 0 8px grey;
+    }
+    .profile-box img{
+        max-width: 200px;
+        display: block;
+        transform:translateY(-40%);
+        
+    }
+    @media screen and (max-width:767px){
+        body{
+            background-size: contain;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<div class="container " style="transform:translateY(20vh)">
+    
+    <div class="container bg-white profile-box">
+        <center>
+            {% if user.gender=='F' %}
+            <img src="../static/images/profileboxfemale.png" style="max-width:170px;">
+            {% else %}
+            <img src="../static/images/profileboxmale.png" >
+            {% endif %}
+        </center>
+        <div class="text-center display name">
+            <h1 class="display">
+                {{ user.username }}
+            </h1>
+                {% if user.id[0:3]=='01' %}
+                    <h3>Customer</h3>
+                {% else %}
+                    <h3>Seller</h3>
+                {% endif %}
+            <div class="container mt-2">
+                {% if user.id[0:3]=='01' %}
+                    <div class="row">
+                        <div class="col-4">orders made<br> 32</div>
+                        <div class="col-4">favourite brand<br>sigma</div>
+                        <div class="col-4">wallet<br>1000</div>
+                    </div>
+                {% else %}
+                    <div class="row">
+                        <div class="col-4">Products owned<br> {{ user.owned_products | length }} </div>
+                        <div class="col-4">Most engaged brand<br>{{msb}}</div>
+                        <div class="col-4">wallet<br>{{ user.wallet }}</div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mt-5">
+                {{ user.email }}
+                {{ user.phno }}
+            </div>
+            <div class="mt-5">
+                {{ user.address }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

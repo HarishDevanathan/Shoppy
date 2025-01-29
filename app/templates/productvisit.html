@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ super() }}
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="../static/styles/productvisit.css">
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<div class="container-fluid mt-5 ">
+    <div class="row">
+        <div class="col-4">
+            <img src="../static/productimages/SQUF10527400.jpg">
+        </div>
+        <div class="col-8">
+            <div class="row">
+                water bottle | tupperware | SQUF10527400 | 30% off
+            </div>
+            <br>
+            <div class="row">
+                <div class="discount-price decoration-line-through ">
+                    ₹5000
+                </div>
+                <div class="mrp">
+                    ₹3500
+                </div>
+            </div>
+            <div class="row">
+                this a watter bottle Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus odio enim neque saepe vitae! Similique facilis, aut perferendis accusamus, minus alias cupiditate repellat, eum officiis deserunt dolore autem reprehenderit magnam. Laudantium, repudiandae asperiores. Quis, temporibus? Laboriosam officia placeat ipsa, id voluptatibus voluptatum quo sunt amet, assumenda ea doloribus debitis! Veniam.
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div>
+                    <button class="btn btn-warning">add to cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

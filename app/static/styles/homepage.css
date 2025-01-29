@@ -270,3 +270,9 @@ body.loaded{
     margin-right:10px;
     border:1px solid black;
 }
+
+.prodname:hover{
+    color:rgb(15, 176, 229);
+    cursor: pointer;
+    transition:0.5s;
+}
