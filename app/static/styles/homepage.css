@@ -1,11 +1,3 @@
-body{
-    opacity:0;
-    transition:0.5s
-}
-body.loaded{
-    opacity:1;
-    transition:0.5s
-}
 .homenav {
     border-radius: 10px;
     background-color: red;

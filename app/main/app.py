@@ -366,5 +366,5 @@ def profilemod():
     return render_template('profilemod.html',user=user,msb=tempkey)
     
 if __name__ == "__main__":
-    #webbrowser.open("http://127.0.0.1:5001/login")
+    webbrowser.open("http://127.0.0.1:5001/login")
     app.run(debug=True, port=5001)
