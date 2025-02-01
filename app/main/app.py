@@ -13,6 +13,7 @@ import webbrowser
 from sqlalchemy import func
 import random
 import json
+from datetime import datetime
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
 app.config['SECRET_KEY'] = "This_is_a_secret_key_@123!@#"
@@ -284,9 +285,29 @@ def clearsession():
     session.clear()
     return redirect(url_for('login'))
 
-@app.route('/product')
-def product():
-    return render_template('productvisit.html')
+
+
+@app.route('/product/<productid>')
+def product(productid):
+    product = products.query.filter(products.product_id == productid ).first()
+    
+    if product:
+        comments =product.comments
+        
+        for comment in comments:
+            comment_date_str = comment.get("date")
+            if comment_date_str:
+                comment_date = datetime.strptime(comment_date_str, "%Y-%m-%d")
+                days_ago = (datetime.now() - comment_date).days
+                comment["days_ago"] = f"{days_ago} days ago" if days_ago > 0 else "JUST NOW"
+            else:
+                comment["days_ago"] = "Date not available"
+
+
+        return render_template('productvisit.html', product=product, comments=comments)
+
+    return "Product not found"
+
 
 @app.route('/profback')
 def profilemod():
@@ -309,11 +330,11 @@ def profilemod():
             tempkey=key
             tempvalue=value
     print(user.gender)
-    if tempkey!="":
+    if tempkey=="":
         tempkey='-'
     
     return render_template('profilemod.html',user=user,msb=tempkey)
     
 if __name__ == "__main__":
-    webbrowser.open("http://127.0.0.1:5001/login")
+    #webbrowser.open("http://127.0.0.1:5001/login")
     app.run(debug=True, port=5001)

@@ -58,8 +58,8 @@
                     <div class="pimg mb-2">
                         <img src="../static/productimages/{{product.imagepath}}" alt="Product Image" class="rounded">
                     </div>
-                    <div class="prodname">
-                        <p>| {{product.name}} | {{product.brand}} | {{product.smdesc}} |</p>
+                    <div class="prodname" >
+                        <p onclick="navigate_to_url('/product/{{product.product_id}}')">| {{product.name}} | {{product.brand}} | {{product.smdesc}} |</p>
                     </div>
                     <div class="rating mb-2" id="rating">
                         {% if product.rating is not none and product.rating_count > 0 %}
@@ -83,7 +83,7 @@
                         
                             <div class="original custom-font">₹{{product.mrp}}</div>
                             <div class="discount custom-font">₹{{product.discountprice}}</div>
-                            <div class="off custom-font" style="color:rgb(220, 99, 99)">{{product.discountpercentage}}% off</div>
+                            <div class="off custom-font" style="color:rgb(220, 99, 99);   font-size:small;">{{product.discountpercentage}}% off</div>
                         
                         {% else %}
                             <div class="original custom-font">&nbsp</div>

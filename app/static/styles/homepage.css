@@ -112,8 +112,9 @@ body.loaded{
     padding: 15px;
     background-color:white;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px 5px grey;
     margin: 20px auto;
+    align-items: stretch;
 }
 
 @media (max-width: 768px) {
@@ -136,7 +137,6 @@ body.loaded{
     border:1px solid red;
     border-radius: 2%;
     padding:5px;
-    box-shadow: 0 0 15px 5px grey;
     background-color: black;
 }
 
@@ -159,6 +159,7 @@ body.loaded{
     font-weight: 500;
     color: #007bff;
     margin-bottom: 10px;
+    min-height:12%;
 }
 
 .price {
@@ -171,6 +172,7 @@ body.loaded{
 .price .original {
     text-decoration: line-through;
     color: #888;
+    font-size:small;
 }
 
 .price .discount {
@@ -261,6 +263,7 @@ body.loaded{
 }
 #rating{
     color:white;
+    font-size: small;
 }
 #explore{
     font-weight: bold;

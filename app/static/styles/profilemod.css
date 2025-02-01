@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-image: url('../images/profilebg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.profile-box{
+    max-width: 600px;
+    min-height:60vh;
+    width:80vw;
+    border:1px solid black;
+    border-radius:10px;
+    box-shadow: 0 4px 8px grey, 0 -4px 8px grey, 4px 0 8px grey, -4px 0 8px grey;
+}
+
+.profile-box img{
+    max-width: 200px;
+    display: block;
+    transform:translateY(-40%); 
+}
+
+.username{
+    color:black
+}
+
+.designation{
+    color:rgb(83, 83, 83);
+}
+#productsowned{
+    color:green
+}
+#meb{
+    color:red;
+}
+#wallet{
+    color:brown;
+}
+#email{
+    color:blue
+}
+@media screen and (max-width:767px){
+    body{
+        background-size: contain;
+    }
+}

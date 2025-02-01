@@ -6,36 +6,7 @@
 
 {% block head %}
 {{ super() }}
-<style>
-    body {
-        margin: 0;
-        height: 100vh;
-        background-image: url('../static/images/profilebg.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    .profile-box{
-        max-width: 600px;
-        min-height:60vh;
-        width:80vw;
-        border:1px solid black;
-        border-radius:10px;
-        box-shadow: 0 4px 8px grey, 0 -4px 8px grey, 4px 0 8px grey, -4px 0 8px grey;
-    }
-    .profile-box img{
-        max-width: 200px;
-        display: block;
-        transform:translateY(-40%);
-        
-    }
-    @media screen and (max-width:767px){
-        body{
-            background-size: contain;
-        }
-    }
-</style>
+<link rel="stylesheet" href="../static/styles/profilemod.css">
 {% endblock %}
 
 {% block body %}
@@ -51,13 +22,13 @@
             {% endif %}
         </center>
         <div class="text-center display name">
-            <h1 class="display">
+            <h1 class="display username">
                 {{ user.username }}
             </h1>
                 {% if user.id[0:3]=='01' %}
-                    <h3>Customer</h3>
+                    <h3 class="designation">Customer</h3>
                 {% else %}
-                    <h3>Seller</h3>
+                    <h3 class="designation">Seller</h3>
                 {% endif %}
             <div class="container mt-2">
                 {% if user.id[0:3]=='01' %}
@@ -68,14 +39,15 @@
                     </div>
                 {% else %}
                     <div class="row">
-                        <div class="col-4">Products owned<br> {{ user.owned_products | length }} </div>
-                        <div class="col-4">Most engaged brand<br>{{msb}}</div>
-                        <div class="col-4">wallet<br>{{ user.wallet }}</div>
+                        <div class="col-4" id="productsowned">Products owned<br> {{ user.owned_products | length }} </div>
+                        <div class="col-4" id="meb">Most engaged brand<br>{{msb}}</div>
+                        <div class="col-4" id="wallet">wallet<br>{{ user.wallet }}</div>
                     </div>
                 {% endif %}
             </div>
             <div class="mt-5">
-                {{ user.email }}
+                <div id="email">{{ user.email }}</div>
+                
                 {{ user.phno }}
             </div>
             <div class="mt-5">

@@ -50,7 +50,7 @@ class products(db.Model):
     rating_count=db.Column(db.Integer)
     smdesc=db.Column(db.String(100))
     mrp=db.Column(db.Integer)
-
+    comments=db.Column(db.JSON)
     user=db.relationship('user_data',backref='products')
 
     def __repr__(self):
