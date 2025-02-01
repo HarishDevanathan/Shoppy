@@ -2,7 +2,6 @@
     width:30vw;
     height:auto;
     margin-left:10%;
-    transform: translateX("10%");
 }
 
 .price{
@@ -11,9 +10,9 @@
 .comment-box{
     background-color: rgba(152, 138, 138, 0.1);
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1), 0px -4px 12px rgba(0, 0, 0, 0.1), 4px 0px 12px rgba(0, 0, 0, 0.1), -4px 0px 12px rgba(0, 0, 0, 0.1);
+    margin: 10px;
 }
 .comment{
     border:1px solid black;
     background-color:rgb(230, 229, 237);
-    
 }

@@ -32,11 +32,17 @@
                     <form method="POST" action="{{ url_for('login') }}" autocomplete="off">
                         {{ form.hidden_tag() }}
                         <div class="form-group">
-                            <label for="username" id="userlabel">Username</label>
+                            <div>
+                                <label class="d-inline" for="username" id="userlabel">Username</label>
+                                <span class="text-danger d-inline-block text-end" id="usererror">{{ errors['username'] }}</span>
+                            </div>
                             {{ form.username(class="form-control", id="username") }}
                         </div>
                         <div class="form-group">
-                            <label for="password" id="passlabel">Password</label>
+                            <div>
+                                <label class="d-inline" for="password" id="passlabel">Password</label>
+                                <span class="text-danger d-inline-block text-end" id="passerror">{{ errors['password'] }}</span>
+                            </div>
                             {{ form.password(class="form-control", id="password", type="password") }}
                         </div>
                         <button class="mt-4 ms-3 ps-3 pe-3 mb-3 btn btn-primary" type="submit">Confirm</button>
@@ -74,6 +80,12 @@
     function navigate_to_url(url){
         window.location.href=url
     }
+    user=document.getElementById('usererror');
+    pass=document.getElementById('passerror');
+    setTimeout(()=>{
+        user.innerHTML="";
+        pass.innerHTML="";
+    },1500);
 </script>
 
 </html>

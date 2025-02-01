@@ -13,7 +13,9 @@ import webbrowser
 from sqlalchemy import func
 import random
 import json
+import time
 from datetime import datetime
+import threading
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
 app.config['SECRET_KEY'] = "This_is_a_secret_key_@123!@#"
@@ -45,10 +47,19 @@ def aboutus():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    errors={}
+    errors['username']=""
+    errors['password']=""
+
+    def userclear():
+        errors['username']=""
+    def passclear():
+        errors['password']=""
+    
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-
+        
         check_user = user_data.query.filter(func.lower(user_data.username)==username.lower()).first()
         if check_user:
             if check_password_hash(check_user.passw, password):
@@ -57,10 +68,16 @@ def login():
                 flash("Login successful!", "success")
                 return redirect(url_for('home'))
             else:
-                flash("Invalid credentials.", "danger")
+                errors['password']="Invalid password"
+                errors['username']=""
+                #time.sleep(2)
+                #errors['password']=""
         else:
-            flash("Username doesn't exist.", "danger")
-    return render_template("loginpage.html", form=form)
+            errors['password']=""
+            errors['username']="Invalid username"
+            #time.sleep(2)
+            #errors['username']=""
+    return render_template("loginpage.html", form=form,errors=errors)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -299,7 +316,20 @@ def product(productid):
             if comment_date_str:
                 comment_date = datetime.strptime(comment_date_str, "%Y-%m-%d")
                 days_ago = (datetime.now() - comment_date).days
-                comment["days_ago"] = f"{days_ago} days ago" if days_ago > 0 else "JUST NOW"
+                if(days_ago>=365):
+                    years=days_ago//365.25
+                    if(years>1):
+                        comment["days_ago"]=f"{int(years)} years ago"
+                    else:
+                        comment["days_ago"]="1 year ago"
+                elif days_ago>=31:
+                    months=days_ago//30
+                    if(months>1):
+                        comment["days_ago"]=f"{int(months)} months ago"
+                    else:
+                        comment["days_ago"]="1 month ago"
+                else:
+                    comment["days_ago"] = f"{days_ago} days ago" if days_ago > 0 else "JUST NOW"
             else:
                 comment["days_ago"] = "Date not available"
 

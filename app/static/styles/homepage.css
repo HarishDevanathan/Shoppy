@@ -112,7 +112,6 @@ body.loaded{
     padding: 15px;
     background-color:white;
     border-radius: 8px;
-    box-shadow: 0 0 15px 5px grey;
     margin: 20px auto;
     align-items: stretch;
 }
@@ -134,7 +133,6 @@ body.loaded{
 .prodgrid{
     text-align: center;
     max-width: 300px;
-    border:1px solid red;
     border-radius: 2%;
     padding:5px;
     background-color: black;
@@ -156,8 +154,7 @@ body.loaded{
 
 .prodname {
     font-size: 1.1rem;
-    font-weight: 500;
-    color: #007bff;
+    color:rgb(188, 188, 216);
     margin-bottom: 10px;
     min-height:12%;
 }
@@ -262,7 +259,7 @@ body.loaded{
     }
 }
 #rating{
-    color:white;
+    color:grey;
     font-size: small;
 }
 #explore{

@@ -139,3 +139,10 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+#usererror,#passerror{
+    position:relative;
+    transform:translateX(30%);
+    font-size:small;
+    display:block;
+}
