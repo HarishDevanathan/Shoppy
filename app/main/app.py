@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, session, flash, request
-from forms import LoginForm, SignupForm,ProfileForm
+from forms import LoginForm, SignupForm, ProfileForm, ForgotPasswordForm, OTPForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import user_data,db
 from flask_sqlalchemy import SQLAlchemy
@@ -12,6 +12,10 @@ from datetime import timedelta
 import webbrowser
 from sqlalchemy import func
 import random
+import json
+import time
+from datetime import datetime
+import threading
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
 app.config['SECRET_KEY'] = "This_is_a_secret_key_@123!@#"
@@ -28,14 +32,10 @@ app.permanent_session_lifetime=timedelta(hours=2)
 db.init_app(app)
 init_mail(app)
 
-@app.route('/')
-def base():
-    return render_template("base.html")
-
 @app.route('/clear-session', methods=['POST'])
 def clear_session():
     session.clear()
-    return '', 200
+    return redirect(url_for('login'))
 
 @app.route('/aboutus')
 def aboutus():
@@ -47,10 +47,19 @@ def aboutus():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    errors={}
+    errors['username']=""
+    errors['password']=""
+
+    def userclear():
+        errors['username']=""
+    def passclear():
+        errors['password']=""
+    
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-
+        
         check_user = user_data.query.filter(func.lower(user_data.username)==username.lower()).first()
         if check_user:
             if check_password_hash(check_user.passw, password):
@@ -59,10 +68,16 @@ def login():
                 flash("Login successful!", "success")
                 return redirect(url_for('home'))
             else:
-                flash("Invalid credentials.", "danger")
+                errors['password']="Invalid password"
+                errors['username']=""
+                #time.sleep(2)
+                #errors['password']=""
         else:
-            flash("Username doesn't exist.", "danger")
-    return render_template("loginpage.html", form=form)
+            errors['password']=""
+            errors['username']="Invalid username"
+            #time.sleep(2)
+            #errors['username']=""
+    return render_template("loginpage.html", form=form,errors=errors)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -110,29 +125,55 @@ def signup():
         print(form.errors) 
     return render_template("signup.html", form=form)
 
-
 @app.route('/home')
 def home():
-    if 'user_id' not in session:
+    if 'username' not in session:
         flash("Please log in first.", "warning")
         return redirect(url_for('login'))
+    
+    check_user=user_data.query.filter(func.lower(user_data.username)==session.get('username').lower()).first()
+    print(check_user.username)
+    if check_user:
+        print("not null")
+        if check_user.hist:
+            userhistory=check_user.hist
+            print(userhistory)
+            print(type(userhistory[0]))
+            productsarr=set()
+            for i in userhistory:
+                print(i)
+                temp = products.query.filter(func.lower(products.name).contains(i.lower())).all()
+                for j in temp:
+                    productsarr.add(j)
+                temp = products.query.filter(func.lower(products.brand).contains(i.lower())).all()
+                for j in temp:
+                    productsarr.add(j)
+            print(productsarr)
+            return render_template("homepage.html",productsarr=productsarr)
+    else:
+        productsarr=[]
+        print(productsarr)
+        return render_template("homepage.html",productsarr=productsarr)
+'''
+@app.route('/home')
+def home():
+    if 'username' not in session:
+        flash("Please log in first.", "warning")
+        return redirect(url_for('login'))
+    
     
     check_product=products.query.filter_by(name="water bottle")
     print(check_product)
     username = session['username']
     return render_template("homepage.html",productsarr=check_product)
-
+'''
+    
 def generate_id():
     with app.app_context():
         id = user_data.generate_uid()
     return id
 
-@app.route('/send-email')
-def send_email_route():
-    send_email('This is a test mail', ['ganeshkumar78602005@gmail.com', 'harishdevanathan123@gmail.com'])
-    return 'Email Sent'
-
-@app.route('/profile', methods=['GET', 'POST'])
+@app.route('/profileedit', methods=['GET', 'POST'])
 def profile():
     if 'username' in session:
         username = session['username']
@@ -201,18 +242,128 @@ def logout():
     
 def genotp():
     return random.randint(100000,999999)
-    
-@app.route('/forgotpassword', methods=['GET', 'POST'])
+
+@app.route('/forgotpassword',methods=['GET','POST'])
 def forgotpassword():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        if email:
-            liste = [email]
-            send_email(str(genotp()), liste)
-            return 'Mail sent successfully'
+    form=ForgotPasswordForm()
+    error_messages={}
+    if form.validate_on_submit():
+        session['username']=form.username.data
+        session['email']=form.email.data
+        print(form.username.data)
+        print(form.email.data)
+        if checkEmail(session.get('username'),session.get('email'))==1:
+            session['otptemp']=str(genotp())
+            send_email( session.get('otptemp') ,[ session.get('email')] )
+            session['switch']=1
+            return redirect(url_for('forgverification'))
+        elif checkEmail(session.get('username'), session.get('email'))==0:
+            error_messages['email']='*Invalid email*'
+            error_messages['username']=''
+        elif checkEmail(session.get('username'), session.get('email'))==-1:
+            error_messages['username']='*Invalid username*'
+            error_messages['email']=''
+    return render_template('forgotpassword.html',form=form,errors=error_messages)
+
+
+def checkEmail(username,checkmail) -> int:
+    with app.app_context():
+        check_user = user_data.query.filter(func.lower(user_data.username) == username.lower()).first()
+        if check_user:
+            if check_user.email==checkmail:
+                return 1
+            else:
+                return 0
         else:
-            return 'Email is required', 400  
-    return render_template('forgotpassword.html')
+            return -1
+        
+@app.route('/forgotpassword/verfication',methods=['GET','POST'])
+def forgverification():
+    if 'switch' in session:
+        form=OTPForm()
+        if session.get('switch')==1:
+            if form.validate_on_submit():
+                otp=form.otp.data
+                if(session.get('otptemp')==otp):
+                    username=session.get('username')
+                    session.clear()
+                    session['username']=username
+                    return redirect(url_for('login'))
+            return render_template('enterotp.html',form=form)
+        else:
+            flash('enter username and email first','Warning')
+            return redirect(url_for('forgotpassword'))
+    else:
+        flash('enter username and email first','Warning')
+        return redirect(url_for('forgotpassword'))
+
+@app.route('/clearsession',methods=['GET'])
+def clearsession():
+    session.clear()
+    return redirect(url_for('login'))
+
+
+
+@app.route('/product/<productid>')
+def product(productid):
+    product = products.query.filter(products.product_id == productid ).first()
+    
+    if product:
+        comments =product.comments
+        
+        for comment in comments:
+            comment_date_str = comment.get("date")
+            if comment_date_str:
+                comment_date = datetime.strptime(comment_date_str, "%Y-%m-%d")
+                days_ago = (datetime.now() - comment_date).days
+                if(days_ago>=365):
+                    years=days_ago//365.25
+                    if(years>1):
+                        comment["days_ago"]=f"{int(years)} years ago"
+                    else:
+                        comment["days_ago"]="1 year ago"
+                elif days_ago>=31:
+                    months=days_ago//30
+                    if(months>1):
+                        comment["days_ago"]=f"{int(months)} months ago"
+                    else:
+                        comment["days_ago"]="1 month ago"
+                else:
+                    comment["days_ago"] = f"{days_ago} days ago" if days_ago > 0 else "JUST NOW"
+            else:
+                comment["days_ago"] = "Date not available"
+
+
+        return render_template('productvisit.html', product=product, comments=comments)
+
+    return "Product not found"
+
+
+@app.route('/profback')
+def profilemod():
+    if 'username' not in session:
+        flash('login first','warning')
+        return redirect(url_for('login'))
+    brand_dict={} 
+    user=user_data.query.filter(func.lower(user_data.username)==session.get('username').lower()).first()
+    for i in user.owned_products:
+        tempprod=products.query.filter(products.product_id==i).first()
+        if tempprod:
+            if tempprod.brand in brand_dict:
+                brand_dict[tempprod.brand]+=1
+            else:
+                brand_dict[tempprod.brand]=1
+    tempkey=""
+    tempvalue=-1
+    for key,value in brand_dict.items():
+        if(value>tempvalue):
+            tempkey=key
+            tempvalue=value
+    print(user.gender)
+    if tempkey=="":
+        tempkey='-'
+    
+    return render_template('profilemod.html',user=user,msb=tempkey)
     
 if __name__ == "__main__":
     webbrowser.open("http://127.0.0.1:5001/login")

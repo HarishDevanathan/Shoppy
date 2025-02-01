@@ -50,50 +50,62 @@
             <span class="dot" data-index="3"></span>
         </div>
     </div>
-    <div class="container main-container">
+        <div class="container main-container">
         {% if productsarr %}
             {% for product in productsarr %}
-            <div class="prodgrid">
-                <div class="pimg mb-2">
-                    <img src="../static/productimages/{{product.imagepath}}" alt="Product Image" class="rounded">
-                </div>
-                <div class="prodname">
-                    <p>| {{product.name}} | {{product.brand}} | {{product.smdesc}} |</p>
-                </div>
-                <div class="rating mb-2" id="rating">
-                    {% if product.rating is not none and product.rating_count > 0 %}
+            
+                <div class="prodgrid">
+                    <div class="pimg mb-2">
+                        <img src="../static/productimages/{{product.imagepath}}" alt="Product Image" class="rounded">
+                    </div>
+                    <div class="prodname" >
+                        <p onclick="navigate_to_url('/product/{{product.product_id}}')">| {{product.name}} | {{product.brand}} | {{product.smdesc}} |</p>
+                    </div>
+                    <div class="rating mb-2" id="rating">
+                        {% if product.rating is not none and product.rating_count > 0 %}
                         Rating:
                         {% for i in range(1, 6) %}
-                            {% if i <= product.rating|round %}
+                            {% if i <= product.rating %}
                                 <i class="fas fa-star" style="color: gold;"></i>
-                            {% elif i - 0.5 <= product.rating|round %}
-                                <i class="fas fa-star-half-alt" style="color: gold;"></i> 
+                            {% elif i - 1 < product.rating < i %}
+                                <i class="fas fa-star-half-alt" style="color: gold;"></i>
                             {% else %}
-                                <i class="far fa-star" style="color: gold;"></i> 
+                                <i class="far fa-star" style="color:grey;"></i>
                             {% endif %}
                         {% endfor %}
                         by {{ product.rating_count }} customer{% if product.rating_count > 1 %}s{% endif %}
                     {% else %}
                         No ratings yet
-                    {% endif %}
-                </div>                          
-                <div class="price">
-                    <div class="original custom-font">₹5000</div>
-                    <div class="discount custom-font">₹3500</div>
-                    <div class="off custom-font">30% off</div>
+                    {% endif %}                
+                    </div>                          
+                    <div class="price">
+                        {% if product.discountpercentage > 0  and product.discountprice > 0 %}
+                        
+                            <div class="original custom-font">₹{{product.mrp}}</div>
+                            <div class="discount custom-font">₹{{product.discountprice}}</div>
+                            <div class="off custom-font" style="color:rgb(220, 99, 99);   font-size:small;">{{product.discountpercentage}}% off</div>
+                        
+                        {% else %}
+                            <div class="original custom-font">&nbsp</div>
+                            <div class="discount custom-font">₹{{product.mrp}}</div>
+                            <div class="off custom-font">&nbsp</div>
+                        {% endif %}
+                    </div>  
+                    <div class="delivery custom-font">
+                        Delivery before {{product.shipping}}
+                    </div>
+                    <div class="addtocart">
+                        <button>Add to Cart</button>
+                    </div>
                 </div>
-                <div class="delivery custom-font">
-                    Delivery before 20 Jan
-                </div>
-                <div class="addtocart">
-                    <button>Add to Cart</button>
-                </div>
-            </div>
             {% endfor %}
+        </div>
         {% else %}
-            <div class="display" >
-                Keep exploring
+        <center>
+            <div class="container mt-5 " id="explore">
+                <h1>Keep exploring</h1>
             </div>
+        </center>
         {% endif %}
         </div>
     </div>
@@ -147,6 +159,11 @@
                 }
             });
         });
+
+
+        window.addEventListener('load',()=>{
+            document.body.classList.add('loaded')
+        })
 
 </script>
 {% endblock %}

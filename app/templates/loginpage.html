@@ -17,11 +17,11 @@
                 <div class="container-fluid">
                     <div class=row>
                         <center>
-                            <h1 class="display-1 display-sm-2 display-md-3 display-lg-4 display-xl-5 fw-bold" style="color:white;">SHOPPY</h1>
+                            <h1 class="display-1 display-sm-2 display-md-3 display-lg-4 display-xl-5 fw-medium" style="color:white;">SHOPPY</h1>
                         </center>
                         <img src="../static/images/logoupscaled.png">
                         <center>
-                            <p class="fs-4 fs-sm-5 fs-md-6 fs-lg-7 fs-xl-8 fw-bold" style="color:red"> "The only thing we dont ship is your regret 😉"</p>
+                            <p class="fs-4 fs-sm-5 fs-md-6 fs-lg-7 fs-xl-8 fw-bold" style="color:red"></p>
                         </center>
                     </div>
                 </div>
@@ -32,18 +32,24 @@
                     <form method="POST" action="{{ url_for('login') }}" autocomplete="off">
                         {{ form.hidden_tag() }}
                         <div class="form-group">
-                            <label for="username" id="userlabel">Username</label>
+                            <div>
+                                <label class="d-inline" for="username" id="userlabel">Username</label>
+                                <span class="text-danger d-inline-block text-end" id="usererror">{{ errors['username'] }}</span>
+                            </div>
                             {{ form.username(class="form-control", id="username") }}
                         </div>
                         <div class="form-group">
-                            <label for="password" id="passlabel">Password</label>
+                            <div>
+                                <label class="d-inline" for="password" id="passlabel">Password</label>
+                                <span class="text-danger d-inline-block text-end" id="passerror">{{ errors['password'] }}</span>
+                            </div>
                             {{ form.password(class="form-control", id="password", type="password") }}
                         </div>
                         <button class="mt-4 ms-3 ps-3 pe-3 mb-3 btn btn-primary" type="submit">Confirm</button>
                         <p class="text-center">Don't have an account?</p>
                         <a href="/signup" class="text-center d-block mx-auto">Sign Up</a>
-                        <button class="text-center d-block mx-auto mt-2 p-2 btn btn-primary">Forgot password</button>
                     </form>
+                    <button class="text-center d-block mx-auto mt-2 p-2 btn btn-primary" onclick="navigate_to_url('/forgotpassword')">Forgot password</button>
                 </div>
             </div>
         </div>
@@ -70,5 +76,16 @@
     document.getElementById('password').addEventListener('blur', () => {
         password.style.color = "rosybrown"
     });
+
+    function navigate_to_url(url){
+        window.location.href=url
+    }
+    user=document.getElementById('usererror');
+    pass=document.getElementById('passerror');
+    setTimeout(()=>{
+        user.innerHTML="";
+        pass.innerHTML="";
+    },1500);
 </script>
+
 </html>

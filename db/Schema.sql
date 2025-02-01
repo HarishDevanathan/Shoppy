@@ -38,6 +38,7 @@ CREATE TABLE `products` (
   `smdesc` varchar(100) DEFAULT NULL,
   `shipping` int DEFAULT NULL,
   `mrp` int DEFAULT NULL,
+  `comments` json DEFAULT NULL,
   PRIMARY KEY (`product_id`),
   KEY `id` (`id`),
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id`) REFERENCES `user_data` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -50,7 +51,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES ('water bottle','tupperware','SQUF10527400','02-12345678',30,3500,'SQUF10527400.jpg','this is a water bottle',5,25,60,2000,'plastic',3,5000),('water bottle','signoraware','VNZJ33302041','02-12345678',30,3500,'VNZJ33302041.jpg','this is set of 9 water bottles',5,20,50,1000,'set of 9 bottles',3,5000);
+INSERT INTO `products` VALUES ('water bottle','tupperware','SQUF10527400','02-12345678',30,3500,'SQUF10527400.jpg','this is a water bottle',5,25,60,2000,'plastic',3,5000,'[{\"rating\": 3.5, \"comment\": \"This is a good bottle, really useful\", \"username\": \"userxxx\"}]'),('water bottle','signoraware','VNZJ33302041','02-12345678',0,3500,'VNZJ33302041.jpg','this is set of 9 water bottles',3.5,20,50,1000,'set of 9 bottles',3,5000,'[{\"date\": \"2025-01-01\", \"rating\": 3.5, \"comment\": \"Nice bottle\", \"username\": \"userXXX\"}, {\"date\": \"1988-02-10\", \"rating\": 0.0, \"comment\": \"Nice try diddy || diddy tera dewar diwana\", \"username\": \"Wishall\"}]');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,10 +75,13 @@ CREATE TABLE `user_data` (
   `wallet` int DEFAULT NULL,
   `owned_products` json DEFAULT NULL,
   `hist` json DEFAULT NULL,
+  `wishlist` json DEFAULT NULL,
+  `gender` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`username`),
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `phno` (`phno`)
+  UNIQUE KEY `phno` (`phno`),
+  CONSTRAINT `gender_check` CHECK ((`gender` in (_utf8mb4'M',_utf8mb4'F')))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -87,7 +91,7 @@ CREATE TABLE `user_data` (
 
 LOCK TABLES `user_data` WRITE;
 /*!40000 ALTER TABLE `user_data` DISABLE KEYS */;
-INSERT INTO `user_data` VALUES ('Ganesh','scrypt:32768:8:1$S2lqZs4PBLjLdnU7$edd24fa10a37e034f18bdb53f19e05aadb4ef3e39b49dc562d6b0644fa1645a9825018dc4b91c2386dfde9bae8fb3864117a3bba33050247858b9556a918a0ac','abcd@gmail.com','+91-1234567890','no 17','2025-01-14','02-12345678',NULL,NULL,1000,'[\"VNZJ33302041\"]',NULL);
+INSERT INTO `user_data` VALUES ('Ganesh','scrypt:32768:8:1$S2lqZs4PBLjLdnU7$edd24fa10a37e034f18bdb53f19e05aadb4ef3e39b49dc562d6b0644fa1645a9825018dc4b91c2386dfde9bae8fb3864117a3bba33050247858b9556a918a0ac','ganeshkumar78602005@gmail.com','+91-1234567890','no 10, mount road, Anna nagar, kelambakkam, Chennai-600001.','2025-01-14','02-12345678',NULL,NULL,1000,'[\"VNZJ33302041\"]','[\"water bottle\"]',NULL,'M');
 /*!40000 ALTER TABLE `user_data` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -100,4 +104,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-18 21:59:21
+-- Dump completed on 2025-02-01 14:29:25

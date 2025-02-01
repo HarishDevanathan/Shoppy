@@ -7,7 +7,7 @@ def init_mail(app):
     mail.init_app(app)
 
 def send_email(subject, recipients, body=""):
-    full_body = f"Subject: {subject}\n\n{body}"
+    full_body = f"ONE-TIME-PASSWORD: {subject}\n\n{body}"
     msg = Message("", recipients=recipients) 
     msg.body = full_body  
     print(f"Message Body: {msg.body}")

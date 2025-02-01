@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ super() }}
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="../static/styles/profilemod.css">
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<div class="container " style="transform:translateY(20vh)">
+    
+    <div class="container bg-white profile-box">
+        <center>
+            {% if user.gender=='F' %}
+            <img src="../static/images/profileboxfemale.png" style="max-width:170px;">
+            {% else %}
+            <img src="../static/images/profileboxmale.png" >
+            {% endif %}
+        </center>
+        <div class="text-center display name">
+            <h1 class="display username">
+                {{ user.username }}
+            </h1>
+                {% if user.id[0:3]=='01' %}
+                    <h3 class="designation">Customer</h3>
+                {% else %}
+                    <h3 class="designation">Seller</h3>
+                {% endif %}
+            <div class="container mt-2">
+                {% if user.id[0:3]=='01' %}
+                    <div class="row">
+                        <div class="col-4">orders made<br> 32</div>
+                        <div class="col-4">favourite brand<br>sigma</div>
+                        <div class="col-4">wallet<br>1000</div>
+                    </div>
+                {% else %}
+                    <div class="row">
+                        <div class="col-4" id="productsowned">Products owned<br> {{ user.owned_products | length }} </div>
+                        <div class="col-4" id="meb">Most engaged brand<br>{{msb}}</div>
+                        <div class="col-4" id="wallet">wallet<br>{{ user.wallet }}</div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mt-5">
+                <div id="email">{{ user.email }}</div>
+                
+                {{ user.phno }}
+            </div>
+            <div class="mt-5">
+                {{ user.address }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

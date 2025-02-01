@@ -18,7 +18,8 @@ class user_data(db.Model):
     wallet=db.Column(db.Integer)
     owned_products=db.Column(db.JSON)
     hist=db.Column(db.JSON)
-
+    wishlist=db.Column(db.JSON)
+    gender=db.Column(db.String(1))
     def __repr__(self):
         return f'{self.username}'
     
@@ -49,7 +50,7 @@ class products(db.Model):
     rating_count=db.Column(db.Integer)
     smdesc=db.Column(db.String(100))
     mrp=db.Column(db.Integer)
-
+    comments=db.Column(db.JSON)
     user=db.relationship('user_data',backref='products')
 
     def __repr__(self):
