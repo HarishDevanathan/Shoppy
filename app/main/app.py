@@ -10,7 +10,7 @@ from models import user_data,products, db
 from mails import send_email, init_mail
 from datetime import timedelta
 import webbrowser
-from sqlalchemy import func
+from sqlalchemy import func,desc
 import random
 import json
 import time
@@ -125,7 +125,7 @@ def signup():
         print(form.errors) 
     return render_template("signup.html", form=form)
 
-@app.route('/home')
+@app.route('/home',methods=['GET','POST'])
 def home():
     if 'username' not in session:
         flash("Please log in first.", "warning")
@@ -133,6 +133,13 @@ def home():
     
     check_user=user_data.query.filter(func.lower(user_data.username)==session.get('username').lower()).first()
     print(check_user.username)
+
+    if request.method=='POST':
+        tempstr=request.form.get('searchbar')
+        if(tempstr!=""):
+            return redirect(url_for('search',prod=tempstr))
+        else:
+            return redirect(url_for('home'))
     if check_user:
         print("not null")
         if check_user.hist:
@@ -150,6 +157,7 @@ def home():
                     productsarr.add(j)
             print(productsarr)
             return render_template("homepage.html",productsarr=productsarr)
+        
     else:
         productsarr=[]
         print(productsarr)
@@ -364,7 +372,34 @@ def profilemod():
         tempkey='-'
     
     return render_template('profilemod.html',user=user,msb=tempkey)
+
+@app.route('/search/<prod>',methods=['GET','POST'])
+def search(prod):
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    
+    if request.method=='POST':
+        tempstr=request.form.get('searchbar')
+        if(tempstr!=""):
+            return redirect(url_for('search',prod=tempstr))
+        else:
+            return redirect(url_for('home'))
+
+    searched=[]
+    temp=products.query.filter(products.product_id==prod).first()
+    if(temp):
+            searched.append(temp)
+    temp=products.query.filter(func.lower(products.name).contains(prod.lower())).order_by(desc(products.units_sold))
+    templ=[]
+    mostsold=""
+    for i in temp:
+            templ.append(i)
+            searched.append(i)
+    if templ!=[] :
+        mostsold=templ[0].product_id
+        
+    return render_template('search.html',searched=searched,mostsold=mostsold)
     
 if __name__ == "__main__":
-    webbrowser.open("http://127.0.0.1:5001/login")
+    #webbrowser.open("http://127.0.0.1:5001/login")
     app.run(debug=True, port=5001)

@@ -16,8 +16,8 @@
     <div class="row ms-1 me-1 homenav">
         <div class="col-2 text-center"><button class="btn w-100">sell</button></div>
         <div class="col-4 text-start">
-            <form actions="/aboutus" class="w-100 h-100">
-                <input class="w-100 h-100" type="text" placeholder="🔎 search">
+            <form actions="/aboutus" method="POST" class="w-100 h-100">
+                <input class="w-100 h-100" type="text" placeholder="🔎 search" autocomplete="off" name="searchbar">
             </form>
         </div>
         <div class="col-2 text-center"><button class="btn w-100">cart</button></div>
@@ -54,9 +54,9 @@
         {% if productsarr %}
             {% for product in productsarr %}
             
-                <div class="prodgrid">
+                <div class="prodgrid" >
                     <div class="pimg mb-2">
-                        <img src="../static/productimages/{{product.imagepath}}" alt="Product Image" class="rounded">
+                        <img onclick="navigate_to_url('/product/{{product.product_id}}')" src="../static/productimages/{{product.imagepath}}" alt="Product Image" class="rounded">
                     </div>
                     <div class="prodname" >
                         <p onclick="navigate_to_url('/product/{{product.product_id}}')">| {{product.name}} | {{product.brand}} | {{product.smdesc}} |</p>

@@ -52,7 +52,11 @@
             <p class="text-justify text-muted">
                 {{product.productdesc}}
             </p>
-            <button class="btn btn-warning btn-lg w-100 shadow-sm">Add to Cart</button>
+            {% if product.stock > 0 %}
+                <button class="btn btn-warning btn-lg w-100 shadow-sm">Add to Cart</button>
+            {% else %}
+                <h2 class="fw-bold" style="color:red">OUT OF STOCK</h2>
+            {% endif %}          
         </div>
     </div>
     <div class="container-fluid mt-5 rounded comment-box p-3 ">

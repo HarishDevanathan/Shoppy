@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ super() }}
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="../static/styles/search.css"
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<div class="row ms-1 me-1 homenav">
+    <div class="col-2 text-center"><button class="btn w-100">sell</button></div>
+    <div class="col-4 text-start">
+        <form actions="/" method="POST" class="w-100 h-100">
+            <input class="w-100 h-100" type="text" placeholder="🔎 search" autocomplete="off" name="searchbar">
+        </form>
+    </div>
+    <div class="col-2 text-center"><button class="btn w-100">cart</button></div>
+    <div class="col-2 text-center"><button class="btn w-100">orders</button></div>
+    <div class="col-2 text-center"><button class="btn w-100">deals</button></div>
+</div>
+<center>
+{% if searched %}
+    
+    <div class="container-fluid d-flex searchgrid text-center">
+        <div class="col text-center">
+            {% for product in searched %}
+            <div class="container-fluid prodbox row text-center rounded m-1">
+            <div class="row">
+                <div class="col-4 imgcol">
+                    {% if product.product_id == mostsold %}
+                    <img class="position-absolute" src="../static/images/mostsold.png" style="width:7vw; height:auto;;">
+                    {% endif %}
+                    <img src="../static/productimages/{{product.imagepath}}" class="prodimg">
+                </div>
+                <div class="col-8">
+                    <div class="row m-2 prod-name">
+                        {{product.name}} | {{product.brand}} | {{product.product_id}} | {% if product.discountpercentage > 0 %} 
+                                                                                                {{ product.discountpercentage }}% off |
+                                                                                        {% else %}  
+                                                                                        {% endif %}
+                    </div>
+                    <hr style="color:red;border:1px solid brown;">
+                    <div class="row text-start seller">
+                        Seller: {{product.id}}
+                    </div>
+                    <div class="row mt-2 rating">
+                        <div class="text-start">
+                        {% if product.rating_count <= 0 %}
+                            No ratings yet
+                        {% else %}
+                            {% for i in range(1, 6) %}
+                                {% if i <= product.rating %}
+                                    <i class="fas fa-star" style="color: gold;"></i>
+                                {% elif i - 1 < product.rating < i %}
+                                    <i class="fas fa-star-half-alt" style="color: gold;"></i>
+                                {% else %}
+                                    <i class="far fa-star" style="color:grey;"></i>
+                                {% endif %}
+                            {% endfor %}
+                            by {{product.rating_count}} customers
+                        {% endif %}
+                        </div>
+                    </div>
+                    <div class="row mt-2 price-col">
+                        <div class="text-start">
+                            {% if product.discountprice > 0 %}
+                            <div class="original-price d-inline-block text-decoration-line-through text-start col">
+                                5000
+                            </div>
+                            <div class="discount-price d-inline col text-start">
+                                3500
+                            </div>
+                            {% else %}
+                            <div class="discount-price d-inline col text-start">
+                                {{product.mrp}}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row m-2 delivery">
+                        Delivery before {{product.shipping}} Feb
+                    </div>
+                    <div class="row m-2">
+                        {% if product.stock > 0 %}
+                        <button class="btn btn-warning atc mt-4">add to cart</button>
+                        {% else %}
+                        <h6 class="text-danger text-start mt-4">out of stock</h6>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+{% else %}
+<h1>No results found</h1>
+{% endif %}
+</center>
+{% endblock %}
