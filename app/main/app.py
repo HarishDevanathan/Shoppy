@@ -112,12 +112,12 @@ def signup():
             address=address,
             doj=date.today(),
             id=uid,
-            cart=[],
-            orders=[],
+            cart=None,
+            orders=None,
             wallet=0,
-            owned_products=[],
-            hist=[],
-            wishlist=[],
+            owned_products=None,
+            hist=None,
+            wishlist=None,
             gender=gender
         )
         db.session.add(new_user)
