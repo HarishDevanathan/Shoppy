@@ -87,6 +87,7 @@ def signup():
         password = form.password.data
         email = form.email.data
         phno = form.phno.data
+        gender = form.gender.data
         countrycode = form.countrycode.data
         address = form.address.data
         uid = generate_id()
@@ -115,7 +116,9 @@ def signup():
             orders=[],
             wallet=0,
             owned_products=[],
-            hist=[]
+            hist=[],
+            wishlist=[],
+            gender=gender
         )
         db.session.add(new_user)
         db.session.commit()

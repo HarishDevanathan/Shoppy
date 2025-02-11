@@ -134,6 +134,13 @@
                         </div>
 
                         <div class="form-group mb-3">
+                            <label for="gender" id="gender">Gender</label>
+                            <div>
+                                {{ form.gender(class="form-gender",id="gender") }}
+                            </div>
+                        </div>                        
+                        
+                        <div class="form-group mb-3">
                             <label for="email" id="emaillabel">Email</label>
                             {{ form.email(class="form-control", id="email", type="email") }}
                         </div>
@@ -160,7 +167,7 @@
         phno = document.getElementById('phlabel');
         email = document.getElementById('emaillabel');
         address = document.getElementById('addresslabel');
-    
+        gender=document.getElementById('gender');
         document.getElementById('username').addEventListener('focus', () => {
             username.style.color = "black";
         })
@@ -184,6 +191,14 @@
         document.getElementById('phno').addEventListener('blur', () => {
             phno.style.color = "rosybrown"
         });
+
+        document.getElementById('gender').addEventListener('focus', () => {
+            phno.style.color = "black";
+        })
+    
+        document.getElementById('gender').addEventListener('blur', () => {
+            phno.style.color = "rosybrown"
+        });
     
         document.getElementById('email').addEventListener('focus', () => {
             email.style.color = "black";
@@ -194,11 +209,11 @@
         });
     
         document.getElementById('address').addEventListener('focus', () => {
-            age.style.color = "black";
+            address.style.color = "black";
         })
     
         document.getElementById('address').addEventListener('blur', () => {
-            age.style.color = "rosybrown"
+            address.style.color = "rosybrown"
         });
     </script>
 
