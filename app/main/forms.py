@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,IntegerField,SelectField,SubmitField
+from wtforms import StringField,PasswordField,IntegerField,SelectField,SubmitField,RadioField
 from wtforms.validators import DataRequired,Length,Regexp,Email,NumberRange
 from models import db, user_data
 
@@ -165,6 +165,8 @@ class SignupForm(FlaskForm):
         validators=[DataRequired()]
     )
     
+    gender = RadioField('gender', choices=[('M', 'Male'), ('F', 'Female')], validators=[DataRequired()],render_kw={'class':'no_bullets'})
+
     phno = StringField('phno', validators=[
         DataRequired(),
         Length(10)
