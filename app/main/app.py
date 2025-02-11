@@ -145,11 +145,11 @@ def home():
             return redirect(url_for('home'))
     if check_user:
         print("not null")
+        productsarr=set()
         if check_user.hist:
             userhistory=check_user.hist
             print(userhistory)
             print(type(userhistory[0]))
-            productsarr=set()
             for i in userhistory:
                 print(i)
                 temp = products.query.filter(func.lower(products.name).contains(i.lower())).all()
@@ -159,7 +159,7 @@ def home():
                 for j in temp:
                     productsarr.add(j)
             print(productsarr)
-            return render_template("homepage.html",productsarr=productsarr)
+        return render_template("homepage.html",productsarr=productsarr)
         
     else:
         productsarr=[]
@@ -404,5 +404,5 @@ def search(prod):
     return render_template('search.html',searched=searched,mostsold=mostsold)
     
 if __name__ == "__main__":
-    webbrowser.open("http://127.0.0.1:5001/login")
+    #webbrowser.open("http://127.0.0.1:5001/login")
     app.run(debug=True, port=5001)
