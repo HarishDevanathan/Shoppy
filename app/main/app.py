@@ -389,7 +389,7 @@ def search(prod):
     temp=products.query.filter(products.product_id==prod).first()
     if(temp):
             searched.append(temp)
-    temp=products.query.filter(func.lower(products.name).contains(prod.lower())).order_by(desc(products.units_sold))
+    temp=products.query.filter(func.lower(products.name).contains(prod.lower()) & (products.stock > 0)).order_by(desc(products.units_sold))
     templ=[]
     mostsold=""
     for i in temp:
@@ -401,5 +401,5 @@ def search(prod):
     return render_template('search.html',searched=searched,mostsold=mostsold)
     
 if __name__ == "__main__":
-    #webbrowser.open("http://127.0.0.1:5001/login")
+    webbrowser.open("http://127.0.0.1:5001/login")
     app.run(debug=True, port=5001)

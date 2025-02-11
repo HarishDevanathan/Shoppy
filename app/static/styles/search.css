@@ -87,3 +87,8 @@
     font-size:small;
     margin-left:5px;
 }
+
+.no-result{
+    margin-top:30vh;
+    font-size:2em;
+}

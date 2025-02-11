@@ -31,12 +31,12 @@
             <div class="row">
                 <div class="col-4 imgcol">
                     {% if product.product_id == mostsold %}
-                    <img class="position-absolute" src="../static/images/mostsold.png" style="width:7vw; height:auto;;">
+                    <img class="position-absolute" src="../static/images/mostsold.png" style="width:7vw; height:auto;margin:0px;transform: translateX(-20%);">
                     {% endif %}
-                    <img src="../static/productimages/{{product.imagepath}}" class="prodimg">
+                    <img src="../static/productimages/{{product.imagepath}}" class="prodimg" onclick="navigate_to_url('/product/{{product.product_id}}')">
                 </div>
                 <div class="col-8">
-                    <div class="row m-2 prod-name">
+                    <div class="row m-2 prod-name" onclick="navigate_to_url('/product/{{product.product_id}}')">
                         {{product.name}} | {{product.brand}} | {{product.product_id}} | {% if product.discountpercentage > 0 %} 
                                                                                                 {{ product.discountpercentage }}% off |
                                                                                         {% else %}  
@@ -98,7 +98,7 @@
     </div>
     
 {% else %}
-<h1>No results found</h1>
+<div class="no-result text-dark">No results found!<div>
 {% endif %}
 </center>
 {% endblock %}

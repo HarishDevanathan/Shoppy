@@ -52,7 +52,11 @@
             <p class="text-justify text-muted">
                 {{product.productdesc}}
             </p>
+            
             {% if product.stock > 0 %}
+                {% if product.stock < 10 %}
+                    <p class="text-danger">only {{product.stock}} left in stock</p>
+                {% endif %}
                 <button class="btn btn-warning btn-lg w-100 shadow-sm">Add to Cart</button>
             {% else %}
                 <h2 class="fw-bold" style="color:red">OUT OF STOCK</h2>
